@@ -18,6 +18,9 @@ Analyse exploratoire
 - Matplotlib 
 - Seaborn  
 
+## 📄 Dataset
+[_p2-arbres-fr.csv_](https://s3-eu-west-1.amazonaws.com/static.oc-static.com/prod/courses/files/AI+Engineer/Project+2+Participez+%C3%A0+un+concours+sur+la+Smart+City/p2-arbres-fr.csv)
+
 ## 📈 Compétences évaluées
 
 ###  🎓  Compétences : <i>Utiliser des librairies python pour réaliser une analyse de données exploratoires

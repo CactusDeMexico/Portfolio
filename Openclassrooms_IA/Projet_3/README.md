@@ -24,6 +24,10 @@ Analyse exploratoire
 - Scipy
 - Sklearn
 - Dash
+
+## 📄 Dataset
+[_fr.openfoodfacts.org.products.csv_](https://s3-eu-west-1.amazonaws.com/static.oc-static.com/prod/courses/files/parcours-data-scientist/P2/fr.openfoodfacts.org.products.csv.zip)
+
 ## 📈 Compétences évaluées
 
 ###  🎓  Compétences : <i>Effectuer des opérations de nettoyage sur des données structurées
