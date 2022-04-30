@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="iso-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Test an image segmentation model">
+    <meta name="author" content="">
+    <title>Prediction </title>
+
+    <meta property="og:title" content="Model test" />
+    <meta property="og:type" content="website" />
+
+
+    <meta property="og:description" content="Test an image segmentation model" />
+
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+
+    <!-- Custom Fonts -->
+    <script src="https://use.fontawesome.com/470b91f216.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+     <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/index">
+            <img src="https://cdn-icons.flaticon.com/png/512/1078/premium/1078276.png?token=exp=1642107368~hmac=077555c7fc4858c0779c2a2e7af23234" width="30" height="30"
+                 class="d-inline-block align-top" alt="">
+            Prediction
+        </a>
+
+    </nav>
+</head>
+
+<body>
+<div class="container">
+
+        <div class="form-group">
+            <label for="file_select">Select an image: </label>
+            <form action="/predict" method="GET">
+                <select class="form-control" name="file" id="file_select"
+                        {% for file in file_list %}>
+                            <option value= "{{file}}" SELECTED>{{file}}</option>"
+                        {% endfor %}
+                    </select>
+                <h3>Launch prediction </h3 >
+                    <input class="btn  btn-outline-secondary"   type="submit" value="submit"  />
+            </form>
+    </div>
+</div>
+    <p>
+
+    </p>
+</body>
+
+
+
