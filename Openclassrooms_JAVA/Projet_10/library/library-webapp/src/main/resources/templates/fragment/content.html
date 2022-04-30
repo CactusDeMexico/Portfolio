@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="home">
+
+    <main role="main">
+        <div th:if="${search.equals('0')}" class="jumbotron">
+            <h1> accueil</h1>
+        </div>
+        <div th:if="${!search.equals('0')}" class="jumbotron">
+            <h1 class="display-3"> Vous avez recherché :
+                <td th:text="${search}"></td>
+            </h1>
+        </div>
+
+        <!-- _________________________DEBUT TOPO________________________ -->
+        <div>
+            <div class="container">
+                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                <div class="row">
+                    <div class="col-md-4" th:each="books, stat : ${book}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="#" th:src="@{/img/__${books.getUrlImage()}__}" class="card-img-top" alt="test 1"
+                                 height="300px">
+                            <div class="card-body">
+                                <!-- Nom Sport -->
+                                <h5 class="card-title" th:text="${books.getTitle()}">
+                                </h5>
+
+                                <h6 class="card-title" th:if="${!resaString.contains(books.getTitle())}"> nb
+                                    d'exemplaire
+                                    restant(s)
+                                    <td th:text="${books.getNbCopyAvailable()}"></td>
+                                </h6>
+
+                                <h6 class="card-title" th:each="resa, stat : ${resaNoDuplicate}"
+                                    th:if=" ${resa.getTitle().contains(books.getTitle())}"> nb d'exemplaire
+                                    restant(s)
+                                    <td th:if="${books.getNbCopyAvailable()-resa.getNbres()}<0"
+                                    >0
+                                    </td>
+
+                                    <td th:if="${books.getNbCopyAvailable()-resa.getNbres()}>=0 "
+                                        th:text="${books.getNbCopyAvailable()-resa.getNbres()}"></td>
+                                </h6>
+                                <p class="card-text hide" th:text="${books.getSummary()}">
+
+                                </p>
+                                <div th:each="borrows, stat : ${shortBorrow}"
+
+                                     th:if="${books.getNbCopyAvailable()<1}
+
+                                and ${borrows.getIdBook()}==${books.getIdBook()}
+                                and  ${!resaString.contains(books.getTitle())}
+                                  ">
+                                    <h6 class="card-title">retour supposé le
+                                        <td th:text="${#dates.format(borrows.getReturnDate(),'dd-MM-YYYY')}"></td>
+                                    </h6>
+                                    <h7 class="card-title">il y a 0 reservation pour places
+                                        <td th:text="${books.getNbCopy()*2}"></td>
+                                        disponlible
+                                    </h7>
+                                </div>
+
+                                <div th:each="resa, stat : ${resaNoDuplicate}" th:if="${books.getNbCopyAvailable()-resa.getNbres()<1}
+
+                                and ${resa.getTitle().contains(books.getTitle())}
+
+
+                                  ">
+
+                                    <h6 class="card-title">retour supposé le
+                                        <td th:text="${#dates.format(resa.getAvalaibleDate(),'dd-MM-YYYY')}"></td>
+                                    </h6>
+                                    <h7 class="card-title">il y a
+                                        <td th:text="${resa.getNbres()}"></td>
+                                        reservations pour places
+                                        <td th:text="${resa.getNbMaxRes()}"></td>
+                                        disponlible
+                                    </h7>
+                                    <td th:break></td>
+                                </div>
+                                <td th:if="${!userName.equals('0')}
+                                 and ${!borrowIdBook.contains(#strings.toString(books.getIdBook()))}
+                                 ">
+
+                                <td th:if="
+                                    ${books.getNbCopyAvailable()>0} and ${!borrowedBookByTitle.contains(books.getTitle())}
+                                        and ${!resaString.contains(books.getTitle())}
+
+                                            ">
+                                    <form method="POST"
+                                          th:action="@{/borrow/(idbook=${books.getIdBook()})}">
+                                        <button type="submit" name="submit" value="value"
+                                                th:href="@{/borrow/(idbook=${books.getIdBook()})}"
+                                                class="btn btn-success">Emprunter
+                                        </button>
+                                    </form>
+                                </td>
+
+
+                                <td th:each="resa, stat : ${bookRes}"
+                                    th:if="${resa.getRanking()==1} and ${userId} ==${resa.getIdUser()}
+                                            and ${books.getNbCopyAvailable()>0}
+                                            and ${!borrowedBookByTitle.contains(books.getTitle())}
+                                            and ${resa.getTitle().equals(books.getTitle())}
+
+                                            or ${books.getNbCopyAvailable()-resa.getNbres()>0}
+                                            and ${!borrowedBookByTitle.contains(books.getTitle())}
+                                            and ${resa.getTitle().equals(books.getTitle())}
+
+                                                            ">
+
+                                    <form method="POST"
+                                          th:if="${resa.getRanking()==1}"
+                                          th:action="@{/borrow/(idbook=${books.getIdBook()})}">
+                                        <h6> votre livre est disponible</h6>
+                                        <button type="submit" name="submit" value="value"
+
+                                                th:href="@{/borrow/(idbook=${books.getIdBook()})}"
+                                                class="btn btn-success">Emprunter
+                                        </button>
+
+                                    </form>
+                                    <form method="POST"
+                                          th:if="${resa.getRanking()!=1}"
+                                          th:action="@{/borrow/(idbook=${books.getIdBook()})}">
+
+                                        <button type="submit" name="submit" value="value"
+
+                                                th:href="@{/borrow/(idbook=${books.getIdBook()})}"
+                                                class="btn btn-success">Emprunter
+                                        </button>
+
+                                    </form>
+
+
+                                <td th:break></td>
+                                </td>
+                                </td>
+
+
+                                <div th:each="bookresa, stat : ${bookRes}">
+                                    <div th:if="${!userName.equals('0')}
+                                        and ${books.getNbCopyAvailable()}-${bookresa.getNbres()}<1
+                                        and ${!reservedBook.contains(books.getTitle())}
+                                        and ${!borrowedBookByTitle.contains(books.getTitle())}
+                                        and ${bookresa.getTitle().contains(books.getTitle())}
+                                        and ${bookresa.getNbMaxRes()>bookresa.getNbres()}">
+                                        <form method="POST" th:action="@{/reserv/(idbook=${books.getIdBook()})}">
+                                            <button type="submit" name="submit" value="value"
+                                                    th:href="@{/reserv/(idbook=${books.getIdBook()})}"
+                                                    class="btn btn-success">Reserver
+                                            </button>
+
+                                        </form>
+                                        <div th:break></div>
+                                    </div>
+                                </div>
+                                <div th:if="${!userName.equals('0')}
+                                        and ${books.getNbCopyAvailable()}<1
+                                        and ${!reservedBook.contains(books.getTitle())}
+                                        and ${!borrowedBookByTitle.contains(books.getTitle())}
+                                        and ${!resaString.contains(books.getTitle())}
+                                      ">
+                                    <form method="POST" th:action="@{/reserv/(idbook=${books.getIdBook()})}">
+                                        <button type="submit" name="submit" value="value"
+                                                th:href="@{/reserv/(idbook=${books.getIdBook()})}"
+                                                class="btn btn-success">Reserver
+                                        </button>
+
+                                    </form>
+                                    <div th:break></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- _______________________FIN SPOT_________________________ -->
+                    </div>
+                    <br> <br>
+                </div>
+                </br>
+            </div>
+            <!--______________ FIN TOPO _____________________________-->
+        </div>
+        <div th:if="${book.size()==0}" class="alert alert-primary" role="alert"> Aucun livre disponible</div>
+    </main>
+
+</div>
+<div th:fragment="loggedhome">
+
+    <main role="main">
+        <div class="jumbotron">
+            <h1> Vos emprunts</h1>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div th:each="borrows, stat : ${borrow}">
+                    <div class="col-md-4"
+                         th:each="books, stat : ${book}"
+                         th:if="${borrows.getIdBook()} == ${books.getIdBook()}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="#" th:src="@{/img/__${books.getUrlImage()}__}" class="card-img-top" alt="test 1"
+                                 height="300px">
+                            <div class="card-body">
+                                <!-- Nom Sport -->
+                                <h5 class="card-title" th:text="${books.getTitle()}">
+                                </h5>
+                                <h6 class="card-title">à rendre le :
+                                    <td th:text="${#dates.format(borrows.getReturnDate(),'dd-MM-YYYY')}"></td>
+                                </h6>
+                                <div th:if="${now.compareTo(borrows.getReturnDate())}>0"
+                                     class="row center alert alert-secondary" role="alert"> Vous êtes en retard
+                                </div>
+                                <!--
+                                <div th:if="(${borrows.getReturnDate().compareTo(${now})})>0"
+                                     class="row center alert alert-secondary" role="alert"> Vous êtes en retard
+                                </div>-->
+
+                                <p class="card-text hide" th:text="${books.getSummary()}">
+                                </p>
+
+                                <td th:if="${!borrows.isExtended()} and ${now.compareTo(borrows.getReturnDate())}<0">
+                                    <form method="POST" th:action="@{/borrowed/(idborrow=${borrows.getIdBorrow()})}">
+                                        <button type="submit" name="submit" value="value"
+                                                class="btn btn-success">Ralonger
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="POST" th:action="@{/returnbook/(idborrow=${borrows.getIdBorrow()})}">
+                                        <button type="submit" name="submit" value="value"
+                                                class="btn btn-success">Rendre le livre
+                                        </button>
+                                    </form>
+                                </td>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div th:if="${borrow.size()}==0" class="alert alert-primary" role="alert"> Aucun emprunt</div>
+        </br>
+        <div class="jumbotron">
+            <h1> Vos reservations</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div th:each="reservations, stat : ${bookRes}"
+                     th:if="${reservations.getIdUser()}==${user.getId()}">
+
+                    <div class="col-md-4" th:each="books, stat : ${book}"
+                         th:if="${reservations.getTitle().equals(books.getTitle())}
+                        and ${reservations.getIdUser()}==${user.getId()}
+
+                              ">
+                        <div class="card" style="width: 18rem;">
+                            <img src="#" th:src="@{/img/__${books.getUrlImage()}__}" class="card-img-top" alt="test 1"
+                                 height="300px">
+                            <div class="card-body">
+
+                                <h5 class="card-title" th:text="${books.getTitle()}">
+                                </h5>
+                                <h6 class="card-title">date supposé de retour:
+                                    <td th:text="${#dates.format(reservations.getAvalaibleDate(),'dd-MM-YYYY')}"></td>
+                                </h6>
+                                <h6 class="card-title">vous etes placé:
+                                    <td th:text="${reservations.getRanking()}"></td>
+                                </h6>
+
+                                <p class="card-text hide" th:text="${books.getSummary()}">
+                                </p>
+
+                                <div
+                                        th:if="${books.getNbCopyAvailable()}>0
+                                                    and ${reservations.getRanking()==1}
+                                                    and ${books.getIdBook()}
+                                                    and ${!borrowIdBook.contains(#strings.toString(books.getIdBook()))}
+                                                    and ${books.getTitle().equals(reservations.getTitle())}
+                                                   ">
+                                    <h6> l'ouvrage est disponible </h6>
+                                    <form method="POST"
+                                          th:action="@{/borrow/(idbook=${books.getIdBook()})}">
+                                        <button type="submit" name="submit" value="value"
+                                                th:href="@{/borrow/(idbook=${books.getIdBook()})}"
+                                                class="btn btn-success">Emprunter
+                                        </button>
+                                    </form>
+                                </div>
+                                <td th:break></td>
+
+
+                                <form method="POST" th:action="@{/cancel/(title=${books.getTitle()})}">
+                                    <button type="submit" name="submit" value="value"
+                                            th:href="@{/cancel/(title=${books.getTitle()})}"
+                                            class="btn btn-success">Annuler réservation
+                                    </button>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div th:if=" ${resaString.equals('0')}" class="alert alert-primary" role="alert"> Aucune reservation</div>
+        </br>
+    </main>
+</div>
+
+<div th:fragment="login">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+
+                <h1 class="display-3">Connection</h1>
+                <p>Connecter vous</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <br> <br>
+            <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                L'email ou le mot de passe est incorrect!
+            </div>
+            <form th:action="@{/login}" th:object="${user}" method="POST">
+                <!--_____________________________EMAIL____________________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="email" class="sr-only">Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="email" th:field="*{email}" id="email" name="email" class="form-control"
+                                       placeholder="Email"
+                                       required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--_____________________________PASSWORD____________________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="password" class="sr-only">Password</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-key"></i></div>
+                                <input th:field="*{password}" type="password" id="password" name="password"
+                                       class="form-control"
+                                       placeholder="Mot de passe" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-6">
+                        <br>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" th:href="@{/index}">Se
+                            connecter
+                        </button>
+                        <div class="margin-top20 text-center"> Vous n'avez pas de compte? <a th:href="@{/signup}">Creer
+                            un compte</a>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </main>
+    <br> <br>
+</div>
+
+<div th:fragment="signup">
+    <main role="main">
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Inscription</h1>
+                <p>Veuillez vous inscrire</p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" role="form" method="POST" th:action="@{/signup}" th:object="${user}">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="alert alert-success" role="alert" th:if="${msg}" th:text="${msg}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="firstname">Prénom</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{name}" class="form-control" id="firstname"
+                                       placeholder="Prénom" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="Lastname">Nom</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{lastName}" class="form-control" id="lastname"
+                                       placeholder="Nom" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                                <input type="text" th:field="*{email}" class="form-control" id="email"
+                                       placeholder="email" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}"
+                               th:errors="*{email}">
+                         </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="password">Mot de passe</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="password" th:field="*{password}" class="form-control" id="password"
+                                       placeholder="Mot de passe" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('password')}"
+                               th:errors="*{password}">
+                         </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> <a
+                                th:href="@{/login}">Enregistrer</a></button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </main>
+</div>
+
+<div th:fragment="search">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3"> Vous avez recherché :
+                    <td th:text="${search}"></td>
+                </h1>
+            </div>
+        </div>
+        <!-- _________________________DEBUT TOPO________________________ -->
+        <div>
+            <div class="container">
+
+
+                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                <div class="row">
+
+                    <div class="col-md-4" th:each="books, stat : ${book}">
+                        <div class="card" style="width: 18rem;">
+
+                            <img src="#" th:src="@{/img/__${books.getUrlImage()}__}" class="card-img-top" alt="test 1"
+                                 height="300px">
+                            <div class="card-body">
+                                <!-- Nom Sport -->
+                                <h5 class="card-title" th:text="${books.getTitle()}">
+                                </h5>
+                                <h6 class="card-title">nb d'exemplaire restant(s)
+                                    <td th:text="${books.getNbCopyAvailable()}"></td>
+                                </h6>
+                                <p class="card-text hide" th:text="${books.getSummary()}">
+
+                                </p>
+
+
+                            </div>
+                        </div>
+                        <!-- _______________________FIN SPOT_________________________ -->
+                    </div>
+                </div>
+            </div>
+            <!--______________ FIN TOPO _____________________________-->
+        </div>
+        <div th:if="${book.size()}==0" class="alert alert-primary" role="alert"> Aucun livre disponible</div>
+    </main>
+
+
+</div>
+</body>
+</html>

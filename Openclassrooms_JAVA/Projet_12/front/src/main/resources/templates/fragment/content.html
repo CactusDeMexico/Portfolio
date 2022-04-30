@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="home">
+
+    <main role="main">
+        <div th:if="${search.equals('0')}" class="jumbotron">
+            <h1> accueil</h1>
+        </div>
+        <div th:if="${!search.equals('0')}" class="jumbotron">
+            <h1 class="display-3"> Vous avez recherché :
+                <td th:text="${search}"></td>
+            </h1>
+        </div>
+
+        <hr>
+        <h2 class="text-center">Les projets realisés</h2>
+        <hr>
+        <div class="container">
+
+            <div class="row"  th:each="project, stat : ${projectList}">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+
+                            <a href="">
+                                <img th:src="@{/img/__${project.getUrlImg()}__}" class="card-img-top" alt="..." height="200px"> </a>
+                            <div class="caption">
+                                <div class="card-body">
+                                    <ul class="product-flags">
+                                        <li class="product-flag new" th:text="${project.getType()}">
+
+                                        </li>
+                                    </ul>
+                                    <h3 th:text="${project.getProjectName()}"></h3>
+
+                                    <h4>surface :
+                                        <td th:text="${project.getSurface()}"></td>
+                                        ²</h4>
+
+                                    <p th:text="${project.getDescription()}">description</p>
+
+
+                                    <input type="hidden" name="hidden_name" value=""/>
+
+                                    <input type="hidden" name="hidden_price" value=""/>
+
+                                    <!--
+                                    <p><a href="index.php?page=12" class="btn btn-primary" role="button" name="ajouter">
+                                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">Ajouter</a></p></span>
+
+                                     -->
+                                </div>
+                                <button type="submit" name="add_to_cart"
+                                        class="btn btn-primary glyphicon glyphicon-shopping-cart " value="Add to Cart">
+                                    <b class="text-center"> Devis</b>
+
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div></div>
+        </div>
+        <hr>
+
+    </main>
+
+</div>
+<div th:fragment="loggedhome">
+    <div class="jumbotron">
+        <div class="container">
+            <h1> Bienvenue
+                <td th:text="${userName}"></td>
+            </h1>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+            <div class="row" th:each="meeting, stat : ${meetingList}" th:if="!${meeting.isClosed()}">
+                <div class="col-lg-12 center-block">
+
+                    <table class="table center-block">
+                        <h3 class="text-center"> Vos rendez-vous</h3>
+                        <thead>
+                        <tr>
+                            <th scope="col-sm">date</th>
+                            <th scope="col-sm">email</th>
+                            <th scope="col-md">purpose</th>
+                            <th scope="col-em">invitation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" th:text="${meeting.getDateMeeting()}"></th>
+                            <td th:text="${meeting.getEmail()}"></td>
+                            <td th:text="${meeting.getPurpose()}"></td>
+                            <td th:if="${!meeting.isClosed()}">
+                                <a title="Valider"
+                                   th:href="@{/verifyMeeting/(id_meeting=${meeting.getId()},meeting=true)}"
+                                >
+                                    <i class="fas fa-check"></i>
+                                </a>
+
+                                <a th:href="@{/verifyMeeting/(id_meeting=${meeting.getId()},meeting=false)}"
+                                   title="Annuler">
+                                    <i class="fas fa-times"></i>
+                                </a>
+
+                            </td>
+                            <td th:if="${meeting.isClosed()}">traité</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="alert alert-success" th:if="${NoMeeting}" role="alert">
+                Toutes les demandes de rendez-vous sont traitées
+            </div>
+        </div>
+    </main>
+
+</div>
+
+<div th:fragment="verifyMeeting">
+    <main role="main">
+        <!-- _________________________DEBUT TOPO________________________ -->
+        <div>
+            <div class="container">
+                <!--_________________________ DEBUT SPOT_______________________ -->
+                <div class="jumbotron">
+                    <div class="container" th:if="${meetingValidate}">
+                        <h1> Rendez-vous validé</h1>
+                    </div>
+                    <div class="container" th:if="!${meetingValidate}">
+                        <h1> Rendez-vous annulé</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+</div>
+<div th:fragment="meeting">
+
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1> Prise de rendez vous</h1>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+
+
+            <form th:object="${meeting}" th:action="@{/meeting}" role="form" method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="email">Mail</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{email}" class="form-control" id="email"
+                                       placeholder="Email" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="purpose">Sujet</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{purpose}" class="form-control" id="purpose"
+                                       placeholder="Sujet" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="meetingDate">Date du rendez-vous</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="datetime-local" th:field="*{dateSended}" class="form-control"
+                                       id="meetingDate"
+                                       placeholder="date du rendez vous" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Prendre Rendez vous</button>
+
+            </form>
+        </div>
+    </main>
+</div>
+
+
+<div th:fragment="addProject">
+    <div class="jumbotron">
+        <div class="container">
+            <h1> Ajout de project</h1>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+
+
+            <form  th:action="@{/addProject}" role="form" method="POST" enctype="multipart/form-data">
+                <div th:object="${project}">
+                <div class="row">
+
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="description">Description</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <input type="text" th:field="*{description}" class="form-control" id="description"
+                                       placeholder="Description" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <input type="text" th:field="*{projectName}" class="form-control" id="name"
+                                       placeholder="Name" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="surface">Surface(m²)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <input type="text" th:field="*{surface}" class="form-control" id="surface"
+                                       placeholder="surface" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="type">Type</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <select class="browser-default custom-select" id="type" th:field="*{type}">
+                                    <option th:value="interieur">Intérieur</option>
+                                    <option th:value="exterieur">Exterieur</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="imgSpot">Image</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <input type="file" name="imgSpot"  class="form-control" id="imgSpot"
+                                        required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row" th:object="${material}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="material">Materiaux</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+
+                                <select multiple  th:field="*{name}" id="material"
+                                        class="browser-default custom-select"
+
+                                        >
+                                <div th:each="material, stat : ${materials}">
+                                    <option  th:value="${material.getId()}" th:text="${material.getName()}"></option>
+                                </div>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden"  th:field="*{thickness}" value="2">
+                    <input type="hidden"  th:field="*{opaque}" value="true">
+
+                </div>
+
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ajouter le materiel</button>
+
+            </form>
+        </div>
+    </main>
+</div>
+<div th:fragment="addMaterial">
+
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1> Ajout de materiaux</h1>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+
+
+            <form th:object="${material}" th:action="@{/addMaterial}" role="form" method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <input type="text" th:field="*{name}" class="form-control" id="name"
+                                       placeholder="Name" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="thickness">Epaisseur(mm)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <input type="text" th:field="*{thickness}" class="form-control" id="thickness"
+                                       placeholder="Epaisseur(mm)" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="opaque">Opaque</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <select class="browser-default custom-select" id="opaque" th:field="*{opaque}">
+                                    <option th:value="true">Oui</option>
+                                    <option th:value="false">Non</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ajouter le materiel</button>
+
+            </form>
+        </div>
+    </main>
+</div>
+<div th:fragment="blockEmail">
+
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1> Email bloqué</h1>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+
+
+            <form th:object="${blockedmails}" th:action="@{/block}" role="form" method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="name">Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <input type="text" th:field="*{email}" class="form-control" id="name"
+                                       placeholder="email" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="cause">Raison</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"></div>
+                                <input type="text" th:field="*{cause}" class="form-control" id="cause"
+                                       placeholder="Raison" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Bloquer</button>
+
+            </form>
+        </div>
+    </main>
+</div>
+<div th:fragment="login">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+
+                <h1 class="display-3">Connection</h1>
+                <p>Connecter vous</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <br> <br>
+            <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                L'email ou le mot de passe est incorrect!
+            </div>
+            <form th:action="@{/login}" th:object="${user}" method="POST">
+                <!--_____________________________EMAIL____________________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="email" class="sr-only">Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="email" th:field="*{email}" id="email" name="email" class="form-control"
+                                       placeholder="Email"
+                                       required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--_____________________________PASSWORD____________________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="password" class="sr-only">Password</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-key"></i></div>
+                                <input th:field="*{password}" type="password" id="password" name="password"
+                                       class="form-control"
+                                       placeholder="Mot de passe" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-6">
+                        <br>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" th:href="@{/index}">Se
+                            connecter
+                        </button>
+                        <div class="margin-top20 text-center"> Vous n'avez pas de compte? <a th:href="@{/signup}">Creer
+                            un compte</a>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </main>
+    <br> <br>
+</div>
+<div th:fragment="x">
+    <div class="row"  th:each="project, stat : ${projectList}">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+
+                <a href="">
+                    <img th:src="@{/img/__${project.getUrlImg()}__}" class="card-img-top" alt="..." height="200px"> </a>
+                <div class="caption">
+                    <div class="card-body">
+                        <ul class="product-flags">
+                            <li class="product-flag new" th:text="${project.getType()}">
+
+                            </li>
+                        </ul>
+                        <h3 th:text="${project.getProjectName()}"></h3>
+
+                        <h4>surface :
+                            <td th:text="${project.getSurface()}"></td>
+                            ²</h4>
+
+                        <p th:text="${project.getDescription()}">description</p>
+
+
+                        <input type="hidden" name="hidden_name" value=""/>
+
+                        <input type="hidden" name="hidden_price" value=""/>
+
+                        <!--
+                        <p><a href="index.php?page=12" class="btn btn-primary" role="button" name="ajouter">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">Ajouter</a></p></span>
+
+                         -->
+                    </div>
+                    <button type="submit" name="add_to_cart"
+                            class="btn btn-primary glyphicon glyphicon-shopping-cart " value="Add to Cart">
+                        <b class="text-center"> Devis</b>
+
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+
+        <table class="table center-block">
+            <h3 class="text-center"> Materiaux</h3>
+            <thead>
+            <tr>
+                <th scope="col-lg-8">nom</th>
+                <th scope="col-sm-8">épaisseur</th>
+
+                <th scope="col-sm-8">opaque</th>
+
+            </tr>
+            </thead>
+            <tbody th:each="idM, stat : ${projectMaterList}"  th:if="${idM.getIdProject()}==${project.getId()}">
+
+            <tr th:each="material, stat : ${materials}" th:if="${idM.getIdMaterial()} == ${material.getId()}">
+                <th scope="row"  th:text="${material.getName()}"></th>
+                <td th:text="${material.getThickness()}"></td>
+                <td th:if="${material.isOpaque()}"> Oui</td>
+                <td th:if="!${material.isOpaque()}">Non</td>
+
+                <td>@mdo</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<div th:fragment="signup">
+    <main role="main">
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Inscription</h1>
+                <p>Veuillez vous inscrire</p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" role="form" method="POST" th:action="@{/signup}" th:object="${user}">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="alert alert-success" role="alert" th:if="${msg}" th:text="${msg}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="firstname">Prénom</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{name}" class="form-control" id="firstname"
+                                       placeholder="Prénom" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="Lastname">Nom</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{lastName}" class="form-control" id="lastname"
+                                       placeholder="Nom" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                                <input type="text" th:field="*{email}" class="form-control" id="email"
+                                       placeholder="email" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}"
+                               th:errors="*{email}">
+                         </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="password">Mot de passe</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="password" th:field="*{password}" class="form-control" id="password"
+                                       placeholder="Mot de passe" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('password')}"
+                               th:errors="*{password}">
+                         </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> <a
+                                th:href="@{/login}">Enregistrer</a></button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </main>
+</div>
+
+<div th:fragment="search">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3"> Vous avez recherché :
+                    <td th:text="${search}"></td>
+                </h1>
+            </div>
+        </div>
+        <!-- _________________________DEBUT TOPO________________________ -->
+        <div>
+            <div class="container">
+
+
+                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                <div class="row">
+
+                    <div class="col-md-4" th:each="books, stat : ${book}">
+                        <div class="card" style="width: 18rem;">
+
+                            <img src="#" th:src="@{/img/__${books.getUrlImage()}__}" class="card-img-top" alt="test 1"
+                                 height="300px">
+                            <div class="card-body">
+                                <!-- Nom Sport -->
+                                <h5 class="card-title" th:text="${books.getTitle()}">
+                                </h5>
+                                <h6 class="card-title">nb d'exemplaire restant(s)
+                                    <td th:text="${books.getNbCopyAvailable()}"></td>
+                                </h6>
+                                <p class="card-text hide" th:text="${books.getSummary()}">
+
+                                </p>
+                                <a
+                                        class="btn btn-success">voir</a>
+                            </div>
+                        </div>
+                        <!-- _______________________FIN SPOT_________________________ -->
+                    </div>
+                </div>
+            </div>
+            <!--______________ FIN TOPO _____________________________-->
+        </div>
+        <div th:if="${book.size()}==0" class="alert alert-primary" role="alert"> Aucun livre disponible</div>
+    </main>
+
+
+</div>
+</body>
+</html>

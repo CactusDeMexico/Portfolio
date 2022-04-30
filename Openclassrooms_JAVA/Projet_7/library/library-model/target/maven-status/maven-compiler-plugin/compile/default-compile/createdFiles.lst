@@ -1,0 +1,10 @@
+com\pancarte\Model\Borrow.class
+com\pancarte\Model\Role.class
+com\pancarte\Model\Type.class
+com\pancarte\Model\User.class
+com\pancarte\App.class
+com\pancarte\Model\Author.class
+com\pancarte\Model\Book_List.class
+com\pancarte\Model\Editor.class
+com\pancarte\Model\Book.class
+com\pancarte\Model\Borrowed.class

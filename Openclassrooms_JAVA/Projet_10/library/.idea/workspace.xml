@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="96c07920-0325-4d2b-89fb-ac25db74909a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/library-webapp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/library-webapp/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/configuration/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/controlleur/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/controller/LibraryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library-webapp/src/main/resources/templates/fragment/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/library-webapp/src/main/resources/templates/fragment/content.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/library-batch/target/" />
+    <ignored path="$PROJECT_DIR$/library-webapp/target/" />
+    <ignored path="$PROJECT_DIR$/library-buisiness/target/" />
+    <ignored path="$PROJECT_DIR$/library-consumer/target/" />
+    <ignored path="$PROJECT_DIR$/library-model/target/" />
+    <ignored path="$PROJECT_DIR$/library-business/target/" />
+    <ignored path="$PROJECT_DIR$/../../../../../com/OPENCLASSROOM/Projet 7/library/target/" />
+    <ignored path="$PROJECT_DIR$/library-springboot/target/" />
+    <ignored path="$PROJECT_DIR$/library-consumer2/target/" />
+    <ignored path="$PROJECT_DIR$/libraryconsumer/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/library$LibrarySpringbootApplication.ic" NAME="LibrarySpringbootApplication Coverage Results" MODIFIED="1561227570279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library-consumer/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="18" />
+              <folding>
+                <element signature="n#dependency#0;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#1;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#2;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#3;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#4;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#5;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#6;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#7;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#8;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#9;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#10;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#11;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#12;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#13;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#14;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+                <element signature="n#dependency#16;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library-batch/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library-webapp/mvnw.cmd">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/library-webapp/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library-business/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library-model/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/LibrarySpringbootApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/controller/LibraryController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1360">
+              <caret line="102" selection-start-line="102" selection-end-line="102" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#header#0;class#LibraryController#0" />
+                <element signature="method#searchIt#0;class#LibraryController#0" />
+                <element signature="method#login#0;class#LibraryController#0" />
+                <element signature="method#signup#0;class#LibraryController#0" />
+                <element signature="method#createUser#0;class#LibraryController#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>ticket</find>
+      <find>org.exemple.demo</find>
+      <find>hib</find>
+      <find>@</find>
+      <find>sea</find>
+      <find>lom</find>
+      <find>jpa</find>
+      <find>/login</find>
+      <find>Sign in</find>
+      <find>configuration</find>
+      <find>config</find>
+      <find>microservice-library</find>
+      <find>FeignClientSpecification</find>
+      <find>fe</find>
+      <find>thy</find>
+      <find>Climb</find>
+      <find>th:act</find>
+      <find>dock</find>
+      <find>con</find>
+      <find>img</find>
+      <find>*</find>
+      <find>sys</find>
+      <find>System.out.println(</find>
+      <find>conf</find>
+      <find>jar</find>
+      <find>packa</find>
+      <find>jun</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/tex.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/library/Tex.java" />
+        <option value="$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/controlleur/Parse.java" />
+        <option value="$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/controlleur/ParseIt.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/controlleur/Parse.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/libraryspringboot/controlleur/Parse.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/controlleur/ParseIn.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/controlleur/Parse.java" />
+        <option value="$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/MicroserviceProxy/MicroserviceLibraryProxy.java" />
+        <option value="$PROJECT_DIR$/library-model/src/main/java/com/pancarte/Model/Book_ListBean.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/libraryspringboot/MicroserviceProxy/MicroserviceLibraryProxy.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/ConBook.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/libraryspringboot/configuration/SecurityConfiguration.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/Book/ConBook2.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/Book2/ConBook.java" />
+        <option value="$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/Book2/ConBook.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/Book/ConBook.java" />
+        <option value="$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/Book2/ConBook2.java" />
+        <option value="$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/proxy/MicroserviceLibraryProxy.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/libraryspringboot/controlleur/libraryController.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/libraryspringboot/proxy/MicroserviceLibraryProxy.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/libraryspringboot/LibrarySpringbootApplication.java" />
+        <option value="$PROJECT_DIR$/library-business/src/main/java/com/pancarte/App.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/resources/static/fragment/content.html" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/controlleur/libraryController.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/configuration/WebMvcConfig.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/resources/templates/index.html" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/proxy/MicroserviceLibraryProxy.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/LibrarySpringbootApplication.java" />
+        <option value="$PROJECT_DIR$/library-batch/src/main/java/com/pancarte/application.properties" />
+        <option value="$PROJECT_DIR$/library-batch/src/main/java/com/pancarte/Mail/EmailSender.java" />
+        <option value="$PROJECT_DIR$/library-batch/src/main/java/com/pancarte/App.java" />
+        <option value="$PROJECT_DIR$/library-consumer2/pom.xml" />
+        <option value="$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/App.java" />
+        <option value="$PROJECT_DIR$/consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/libraryconsumer/pom.xml" />
+        <option value="$PROJECT_DIR$/library-batch/src/main/java/com/pancarte/BatchApp.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/resources/templates/fragment/header.html" />
+        <option value="$PROJECT_DIR$/library-business/pom.xml" />
+        <option value="$PROJECT_DIR$/library-model/src/main/java/com/pancarte/Model/Borrow.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/resources/templates/fragment/content.html" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/controlleur/LibraryController.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/configuration/SecurityConfiguration.java" />
+        <option value="$PROJECT_DIR$/library-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/controller/LibraryController.java" />
+        <option value="$PROJECT_DIR$/library-webapp/src/test/java/com/pancarte/LibrarySpringbootApplicationTests.java" />
+        <option value="$PROJECT_DIR$/library-batch/pom.xml" />
+        <option value="$PROJECT_DIR$/library-model/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/library-webapp/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="dedicatedModuleDir" value="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-consumer" />
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Library" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Library" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="library-batch" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="library-batch" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1096" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="library" type="b2602c69:ProjectViewProjectNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="library" type="b2602c69:ProjectViewProjectNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+              <item name="library-webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="library" type="b2602c69:ProjectViewProjectNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+              <item name="library-webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562877440415" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/library-consumer" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-batch\src\main\java\com\pancarte\resources" />
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-batch\src\main\java\com\pancarte" />
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-batch\src\main\java\com\pancarte\Mail" />
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-webapp\src\main\resources\static" />
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-webapp\src\main\resources\templates" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="com.pancarte" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pancarte.libraryspringboot.proxy" />
+      <recent name="com.pancarte.Book2" />
+      <recent name="com.pancarte.Book" />
+      <recent name="com.pancarte.libraryspringboot.MicroserviceProxy" />
+      <recent name="com.pancarte.libraryspringboot.controlleur" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-batch\src\main\java\com\pancarte" />
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-webapp\src\main\resources\static" />
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-consumer\src\main\java\com\pancarte" />
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-consumer\src" />
+      <recent name="C:\Users\vivi\Desktop\x1\COURS\BTS\Java\library\library-model\src\main\java\com\pancarte" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.LibrarySpringbootApplication">
+    <configuration name="LibrarySpringbootApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="library-webapp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.pancarte.LibrarySpringbootApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibrarySpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="library-webapp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.pancarte.LibrarySpringbootApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryWebappApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="library-webapp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.pancarte.LibrarySpringbootApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryWebappApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="library-webapp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.pancarte.LibrarySpringbootApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.LibrarySpringbootApplication" />
+      <item itemvalue="Spring Boot.LibrarySpringbootApplication (1)" />
+      <item itemvalue="Spring Boot.LibraryWebappApplication" />
+      <item itemvalue="Spring Boot.LibraryWebappApplication (1)" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="96c07920-0325-4d2b-89fb-ac25db74909a" name="Default Changelist" comment="" />
+      <created>1561037854260</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1561037854260</updated>
+      <workItem from="1561037869738" duration="151676000" />
+      <workItem from="1562505370292" duration="25371000" />
+      <workItem from="1562581133821" duration="881000" />
+      <workItem from="1562583960624" duration="12781000" />
+      <workItem from="1562909605972" duration="1199000" />
+      <workItem from="1562963380945" duration="1241000" />
+      <workItem from="1563010779625" duration="557000" />
+    </task>
+    <task id="LOCAL-00001" summary="cron">
+      <created>1562302261740</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1562302261740</updated>
+    </task>
+    <task id="LOCAL-00002" summary="maj">
+      <created>1562338073769</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1562338073769</updated>
+    </task>
+    <task id="LOCAL-00003" summary="maj">
+      <created>1562575010862</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1562575010862</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="193706000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project Explorer" order="0" />
+      <window_info id="Job Explorer" order="1" />
+      <window_info id="DB Browser" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.2655068" />
+      <window_info id="Structure" order="4" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Image Layers" order="6" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="UI Designer" order="8" />
+      <window_info id="Favorites" order="9" side_tool="true" />
+      <window_info id="Web" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="DB Execution Console" order="0" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Console" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" weight="0.32917964" />
+      <window_info anchor="bottom" id="Run" order="4" visible="true" weight="0.3281412" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="8" weight="0.32872504" />
+      <window_info anchor="bottom" id="Spring" order="9" weight="0.32872504" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.48540705" />
+      <window_info anchor="bottom" id="Docker" order="11" weight="0.32917964" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.21599169" />
+      <window_info anchor="bottom" id="Java Enterprise" order="14" />
+      <window_info anchor="bottom" id="Database Changes" order="15" />
+      <window_info anchor="bottom" id="Version Control" order="16" />
+      <window_info anchor="bottom" id="Run Dashboard" order="17" weight="0.23052959" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" sideWeight="0.49948078" visible="true" weight="0.4054463" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Coverage" order="5" sideWeight="0.5005192" side_tool="true" weight="0.16257995" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="CDI" order="7" />
+      <window_info anchor="right" id="Database" order="8" weight="0.34221748" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Theme Preview" order="10" />
+      <window_info anchor="right" id="Bean Validation" order="11" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="cron" />
+    <MESSAGE value="maj" />
+    <option name="LAST_COMMIT_MESSAGE" value="maj" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/library-business/src/main/java/com/pancarte/controlleur/Parse.java</url>
+          <line>25</line>
+          <properties class="com.pancarte.controlleur.Parse">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/library-business/src/main/java/com/pancarte/Book/ConBook.java" />
+    <entry file="file://$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/proxy/MicroserviceLibraryProxy.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/io/github/openfeign/feign-core/10.1.0/feign-core-10.1.0-sources.jar!/feign/FeignException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/target/surefire-reports/2019-06-22T15-58-44_638-jvmRun1.dump" />
+    <entry file="file://$PROJECT_DIR$/library-webapp/target/surefire-reports/com.pancarte.libraryspringboot.LibrarySpringbootApplicationTests.txt" />
+    <entry file="file://$PROJECT_DIR$/library-business/src/main/java/com/pancarte/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-model/src/main/java/com/pancarte/Model/Book_List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/static/css/jumbotron.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/5.1.5.RELEASE/spring-security-config-5.1.5.RELEASE.jar!/org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/5.1.5.RELEASE/spring-security-config-5.1.5.RELEASE-sources.jar!/org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="94" column="18" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/static/js/holder.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.21/tomcat-embed-core-9.0.21-sources.jar!/javax/servlet/http/HttpServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="659" selection-start-line="659" selection-end-line="659" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-model/src/main/java/com/pancarte/Model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/templates/fragment/carrousel.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="100" column="7" selection-start-line="100" selection-start-column="7" selection-end-line="100" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-batch/src/main/java/com/pancarte/resources/static/js/assets/js/holder.js" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.1.6.RELEASE/spring-boot-autoconfigure-2.1.6.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/orm/jpa/JpaBaseConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="131" column="50" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-consumer/library-consumer.iml" />
+    <entry file="file://$PROJECT_DIR$/library-batch/library-batch.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-consumer/src/main/java/com/pancarte/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consumer/src/main/java/comp/pancarte/App.java" />
+    <entry file="file://$PROJECT_DIR$/consumer/pom.xml" />
+    <entry file="file://$PROJECT_DIR$/library-batch/src/main/java/resources/application.properties" />
+    <entry file="file://$PROJECT_DIR$/library-batch/src/main/java/com/pancarte/Mail/EmailSender.java" />
+    <entry file="file://$PROJECT_DIR$/library-batch/src/main/java/com/pancarte/BatchApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/templates/fragment/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="50" column="94" selection-start-line="50" selection-start-column="94" selection-end-line="50" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-model/src/main/java/com/pancarte/Model/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-model/src/main/java/com/pancarte/Model/Borrow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-model/src/main/java/com/pancarte/Model/Editor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/templates/fragment/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/static/bootstrap/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2941">
+          <caret line="177" column="22" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/resources/templates/fragment/content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="80" column="37" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
+          <folding>
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#4;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/configuration/WebMvcConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/proxy/MicroserviceLibraryProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="762">
+          <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-consumer/src/test/java/com/pancarte/AppTest.java" />
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/configuration/SecurityConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/target/test-classes/com/pancarte/LibrarySpringbootApplicationTests.class" />
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/test/java/com/pancarte/LibrarySpringbootApplicationTests.java" />
+    <entry file="file://$PROJECT_DIR$/library-webapp/target/surefire-reports/TEST-com.pancarte.LibrarySpringbootApplicationTests.xml" />
+    <entry file="file://$PROJECT_DIR$/library-webapp/target/surefire-reports/com.pancarte.LibrarySpringbootApplicationTests.txt" />
+    <entry file="uml://MAVEN/com.pancarte:library:1.0-SNAPSHOT">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MAVEN</ID>
+          <OriginalElement>com.pancarte:library:1.0-SNAPSHOT</OriginalElement>
+          <nodes>
+            <node x="0.0" y="0.0">com.pancarte:library:1.0-SNAPSHOT</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="-227.0" y="-43.0" />
+          <SelectedNodes>
+            <node>com.pancarte:library:1.0-SNAPSHOT</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>All</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-consumer/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="18" />
+          <folding>
+            <element signature="n#dependency#0;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#1;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#2;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#3;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#4;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#5;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#6;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#7;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#8;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#9;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#10;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#11;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#12;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#13;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#14;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+            <element signature="n#dependency#16;n#dependencies#0;n#dependencyManagement#0;n#project#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-batch/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/mvnw.cmd">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-business/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-model/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/LibrarySpringbootApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/src/main/java/com/pancarte/controller/LibraryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="102" selection-start-line="102" selection-end-line="102" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#header#0;class#LibraryController#0" />
+            <element signature="method#searchIt#0;class#LibraryController#0" />
+            <element signature="method#login#0;class#LibraryController#0" />
+            <element signature="method#signup#0;class#LibraryController#0" />
+            <element signature="method#createUser#0;class#LibraryController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library-webapp/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArquillianSettingsConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>library-webapp:war</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>bootstrap</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>library-consumer</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: junit:junit:4.11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

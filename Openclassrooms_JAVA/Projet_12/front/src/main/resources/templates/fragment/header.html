@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head> <title>Header</title></head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:fragment="header">
+      <td th:if="${userName.equals('0')}">
+        <a class="navbar-brand" th:href="@{/index}">Architect</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-white-50" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
+
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/search}" role="form" method="POST">
+                <a class="nav-link text-muted font-weight-bold" th:href="@{/login}">Connection </a>
+                                <a class="nav-link text-muted font-weight-bold" th:href="@{/meeting}">Rendez vous</a>
+
+                <input class="form-control mr-sm-2" type="text" placeholder="Recherche" id="search1" name="search"
+                       aria-label="Search">
+
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+            </form>
+
+        </div>
+</td>
+        <td th:if="${!userName.equals('0')}">
+            <a class="navbar-brand" th:href="@{/index}">Architect</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault2" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-white-50" id="navbarsExampleDefault2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
+
+                    </li>
+
+
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0" th:action="@{/search}" role="form" method="POST" >
+                    <a class="nav-link text-muted font-weight-bold" th:href="@{/addMaterial}"> Ajouter materiaux </a>
+                    <a class="nav-link text-muted font-weight-bold" th:href="@{/addProject}"> Ajouter project </a>
+                    <a class="nav-link text-muted font-weight-bold" th:href="@{/loggedhome}"> <span th:utext="${userName}"></span></a>
+                    <a class="nav-link text-muted font-weight-bold" th:href="@{/logout}">Déconnexion </a>
+                                     <input class="form-control mr-sm-2" type="text" placeholder="Recherche" id="search1" name="search"
+                           aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                </form>
+            </div>
+        </td>
+    </nav>
+
+
+
+
+
+
+</body>
+
+
+<!-- Placed at the end of the document so the pages load faster -->
+
+
+</html>
+
+
+

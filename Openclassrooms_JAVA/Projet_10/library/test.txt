@@ -1,0 +1,44 @@
+## module : library-batch
+mvn -B archetype:generate \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-quickstart \
+    -DarchetypeVersion=1.1 \
+    -DgroupId=com.pancarte \
+    -DartifactId=library-batch \
+    -Dpackage=com.pancarte.batch
+
+## module : library-webapp
+## Remarquez ici l'utilisation de l'archetype "webapp"
+mvn -B archetype:generate \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-webapp \
+    -DgroupId=com.pancarte \
+    -DartifactId=library-webapp \
+    -Dpackage=com.pancarte.webapp
+
+## module : library-business
+mvn -B archetype:generate \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-quickstart \
+    -DarchetypeVersion=1.1 \
+    -DgroupId=com.pancarte \
+    -DartifactId=library-business \
+    -Dpackage=com.pancarte.business
+
+## module : library-consumer
+mvn -B archetype:generate \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-quickstart \
+    -DarchetypeVersion=1.1 \
+    -DgroupId=com.pancarte \
+    -DartifactId=library-consumer \
+    -Dpackage=com.pancarte.consumer
+
+## module : library-model
+mvn -B archetype:generate \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-quickstart \
+    -DarchetypeVersion=1.1 \
+    -DgroupId=com.pancarte \
+    -DartifactId=library-model \
+    -Dpackage=com.pancarte.Model

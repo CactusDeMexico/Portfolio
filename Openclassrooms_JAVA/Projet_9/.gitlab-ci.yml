@@ -1,0 +1,33 @@
+variables:
+  POSTGRES_DB: db_myerp
+  POSTGRES_USER: usr_myerp
+  POSTGRES_PASSWORD: myerp
+
+cache:
+  paths:
+    - /root/.m2/repository
+
+stages:
+  - build
+  - test
+
+validate:jdk8:
+  stage: build
+  script:
+    - cd src
+    - 'mvn test-compile'
+  image: maven:3.5.0-jdk-8
+
+deploy:jdk8:
+  stage: test
+  services:
+    - postgres:9.6
+  script:
+    - cd src
+    - 'mvn verify -P-test-business'
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
+  image: maven:3.5.0-jdk-8

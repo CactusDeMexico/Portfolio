@@ -1,0 +1,56 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/DECORATION/1.0.0"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
+         name="${project.name}">
+
+
+  <bannerLeft>
+    <name>${project.name}</name>
+    <src>img/logo-app.png</src>
+    <href>${project.url}</href>
+  </bannerLeft>
+
+  <bannerRight>
+    <name>${project.organization.name}</name>
+    <src>img/logo-client.png</src>
+    <href>${project.organization.url}</href>
+  </bannerRight>
+
+
+  <publishDate position="right"/>
+  <version position="right"/>
+
+
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.3.0</version>
+  </skin>
+
+  <body>
+
+  	<breadcrumbs>
+      <item name="Accueil" href="index.html"/>
+    </breadcrumbs>
+
+    <menu name="Informations">
+      <item name="Introduction" href="index.html"/>
+    </menu>
+
+    <menu name="Documentations">
+    	<item name="Document Exemple 1" href="doc/fichierDocExemple.txt"/>
+    </menu>
+
+
+	<menu ref="parent" inherit="top"/>
+    <menu ref="reports" inherit="top"/>
+    <menu ref="modules" inherit="top"/>
+
+    <links>
+    	<item name="MyERP" href="http://www.dummy.com/myerp"/>
+    </links>
+
+    <footer>All rights reserved to ${project.organization.name}</footer>
+
+  </body>
+</project>

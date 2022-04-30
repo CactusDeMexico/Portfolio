@@ -1,0 +1,17 @@
+aiohttp
+botbuilder==0.0.1
+botbuilder_schema==4.14.2
+Flask==1.1.1
+nest_asyncio==1.4.3
+botbuilder-ai==4.14.2
+botbuilder-applicationinsights==4.14.2
+botbuilder-core==4.14.2
+botbuilder-dialogs==4.14.2
+botbuilder-integration-aiohttp==4.14.2
+botbuilder-integration-applicationinsights-aiohttp==4.14.2
+botframework-connector==4.14.2
+botframework-streaming==4.14.2
+opencensus
+opencensus-ext-azure
+pytest
+aiounittest

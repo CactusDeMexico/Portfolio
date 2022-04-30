@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Accueil</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          id="bootstrap-css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type='text/css'
+          href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled-4.7.4.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style type="text/css">/* Chart.js */
+    @-webkit-keyframes chartjs-render-animation {
+        from {
+            opacity: 0.99
+        }
+        to {
+            opacity: 1
+        }
+    }
+
+    @keyframes chartjs-render-animation {
+        from {
+            opacity: 0.99
+        }
+        to {
+            opacity: 1
+        }
+    }
+
+    .product-flags {
+        position: absolute;
+        top: 15px;
+        margin-left: -50px;
+        width: 100%;
+    }
+
+    li.product-flag {
+        display: block;
+        position: absolute;
+        margin-right: 2px;
+        background-color: #2FB5D2;
+        font-weight: 800;
+        padding: 0.3125rem 0.4375rem;
+        text-transform: uppercase;
+        color: white;
+        box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7),
+        -1px 2px 20px rgba(255, 255, 255, 0.6) inset;
+
+
+    }
+    p.hide {
+        height: 150px;
+        overflow: hidden;
+
+        white-space: normal;
+
+        text-overflow: ellipsis;
+
+    }
+    li.product-flag2 {
+        display: block;
+        position: absolute;
+        top: 80px;
+        margin-right: 2px;
+        background-color: #37a52b;
+        font-weight: 800;
+        padding: 0.3125rem 0.4375rem;
+        text-transform: uppercase;
+        color: white;
+        box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7),
+        -1px 2px 20px rgba(255, 255, 255, 0.6) inset;
+    }
+
+    li.product-flag3 {
+        display: block;
+        position: absolute;
+        top: 160px;
+        margin-right: 2px;
+        background-color: #f4425f;
+        font-weight: 800;
+        padding: 0.3125rem 0.4375rem;
+        text-transform: uppercase;
+        color: white;
+        box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7),
+        -1px 2px 20px rgba(255, 255, 255, 0.6) inset;
+    }
+
+    </style>
+</head>
+<body>
+
+
+<div th:replace="~{fragment/header :: header}">Header</div>
+<h1 th:text="${view}"></h1>
+<div th:replace="~{fragment/content :: ${view}}">Content</div>
+</body>
+</html>

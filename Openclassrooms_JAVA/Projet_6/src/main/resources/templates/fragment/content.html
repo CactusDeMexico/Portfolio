@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="home">
+    <main role="main">
+        <!-- carousel-->
+        <div th:replace="~{fragment/carrousel :: carrousel}">carrousel</div>
+
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3"> Nouveau!
+                    <td th:text="${lastSpotName}">
+                </h1>
+                <p th:text="${lastSpotDescription}">
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+        <!-- _________________________DEBUT TOPO________________________ -->
+        <div th:each="topos, stat : ${topo}" th:if="${topos.isHidden()}==false">
+            <div class="container">
+
+                <h1>
+                    <td th:text="${topos.getLieuTopo()}"></td>
+                </h1>
+                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                <div class="row">
+
+                    <div class="col-md-4" th:each="spots, stat : ${spot}"
+                         th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                 class="card-img-top" alt="test 1" height="200px">
+                            <div class="card-body">
+                                <!-- Nom Sport -->
+                                <h5 class="card-title">
+                                    <td th:text="${spots.getNomSpot()}"></td>
+                                </h5>
+                                <p class="card-text" th:text="${spots.getDescription()}">
+
+                                </p>
+                                <a th:href="@{/publication/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                   class="btn btn-success">voir</a>
+                            </div>
+                        </div>
+                        <!-- _______________________FIN SPOT_________________________ -->
+                    </div>
+                </div>
+            </div>
+            <!--______________ FIN TOPO _____________________________-->
+        </div>
+        <div th:if="${topo.size()==0}" class="alert alert-primary" role="alert"> Aucun topo disponible</div>
+    </main>
+</div>
+<div th:fragment="loggedhome">
+    <div th:replace="~{fragment/carrousel :: carrousel}">Carrousel</div>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Bonjour <span th:text="${userName}"></span>, voici votre compte.</h1>
+
+            <p><a class="btn btn-success btn-lg" role="button" th:href="@{/logout}">se déconnecter</a></p>
+        </div>
+    </div>
+
+
+    <main>
+        <div class="container">
+            <div class="row" th:if="${publication.size()}>0">
+                <h1 class="display-3">Vos publications </h1>
+                <div class="container" th:each="publications, stat : ${publication}">
+
+                    <!-- Example row of columns -->
+                    <h1 th:text="${publications.getName()}"></h1>
+                    <h5>derniere mise à jour le
+                        <td th:text="${#dates.format(publications.getUpdatedate(),'dd-MM-YYYY')}"></td>
+                    </h5>
+
+
+                    <div th:each="topos, stat : ${topo}" th:if="${topos.isHidden()}==false">
+
+                        <div class="container">
+                            <div th:each="spots, stat : ${spot}"
+                                 th:if="${publications.getIdpublication()} == ${spots.getIdpublication()}">
+                                <div th:each="toposSelected, stat : ${selectedTopo}"
+                                     th:if="${topos.getIdtopo()} == ${toposSelected.getIdtopo()}">
+                                    <h2 class="text-center"
+                                        th:if="${toposSelected.getIdspot()} == ${spots.getIdspot()}">Les spots de :
+                                        <td th:text="${topos.getLieuTopo()}"></td>
+                                        <hr>
+                                    </h2>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4" th:each="spots, stat : ${spot}"
+                                     th:if="${publications.getIdpublication()} == ${spots.getIdpublication()}">
+
+                                    <div th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+                                        <div class="card" style="width: 18rem;">
+                                            <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                                 class="card-img-top" alt="test 1" height="200px">
+                                            <div class="card-body">
+                                                <ul class="product-flags">
+                                                    <div th:each="rents, stat : ${rent}">
+                                                        <div th:if="${rents.getIdtopo()} == ${topos.getIdtopo()}">
+
+                                                            <!-- si il y deja une location-->
+                                                            <div th:if="${rents.isIsloan() ==true }">
+                                                                <a th:href="@{/unrent/(idtopo=${spots.getIdtopo()})}">
+                                                                    <li class="product-flag new">
+                                                                        annuler location
+                                                                    </li>
+                                                                </a>
+                                                            </div>
+                                                            <!-- si il n'est pas encore louer-->
+                                                            <div th:if="${rents.isIsloan()==false}">
+                                                                <a th:href="@{/rent/(idtopo=${spots.getIdtopo()})}">
+                                                                    <li class="product-flag new">
+                                                                        louer
+                                                                    </li>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div th:each="rents, stat : ${rent}"
+                                                         th:if="${rents.getIduser()==0}">
+                                                        <a th:href="@{/rent/(idtopo=${spots.getIdtopo()})}">
+                                                            <li class="product-flag new">
+                                                                louer
+                                                            </li>
+                                                        </a>
+                                                    </div>
+                                                    <a th:href="@{/UpdateSpot/(idspot=${spots.getIdspot()})}">
+                                                        <li class="product-flag2 new"> modifier</li>
+                                                    </a>
+                                                    <a th:href="@{/deleTopo/(idtopo=${spots.getIdtopo()})}">
+                                                        <li class="product-flag3 new"> supprimer</li>
+                                                    </a>
+                                                </ul>
+
+
+                                                <h4>Nom du spot:<h3 th:text="${spots.getNomSpot()}"></h3></h4>
+                                                <p th:text="${spots.getDescription()}"></p>
+                                                <a th:href="@{/publication/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                                   class="btn btn-success">voir en details</a>
+                                                <a th:href="@{addspot/(idtopo=${topos.getIdtopo()},idpublication=${publications.getIdpublication()})}">
+                                                    <img alt="add"
+                                                         src="https://img.icons8.com/ios/20/000000/plus.png"
+                                                    >
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <div class="row" th:if="${publication.size()}==0">
+
+
+                <div class="col-lg-12">
+                    <div class="row center alert alert-secondary" role="alert"> Vous n'avez aucune publication</div>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <button type="submit" th:href="@{/insertPublication}" class="btn btn-success"><i
+                            class="fas fa-mountain"></i>Creer une publication
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <!--
+                                <hr>
+                                <div th:each="spots, stat : ${spot}"
+                                     th:if="${publications.getIdpublication()} == ${spots.getIdpublication()}">
+
+                                    <div th:if="${spot.indexOf(spots)}==0 and ${idspot}==0"
+                                         th:with="idspot=${spots.getIdspot()}">
+
+                                        <td class="text-center" th:with="idspot=${spots.getIdspot()}"
+                                           ></td>
+
+
+
+                                        <h2 class="text-center">les secteurs du spot :
+                                            <td class="text-center" th:text="${spots.getNomSpot()}"></td>
+                                        </h2>
+                                        <hr>
+
+                                        <div class="container" th:each="secteurs, stat : ${secteur}">
+                                            <div class="row"
+                                                 th:if="${secteurs.getIdspot()} == ${idspot}">
+                                                <div class="col-lg-4">
+                                                    <div class="card" style="width: 18rem;">
+                                                        <a href="">
+                                                            <img src="#" th:src="@{/img/__${secteurs.getLien()}__}"
+                                                                 class="card-img-top"
+                                                                 alt="..."
+                                                                 height="200px"> </a>
+                                                        <div class="caption">
+                                                            <div class="card-body">
+                                                                <ul class="product-flags">
+                                                                    <a th:href="@{/addSecteur/(idspot=${secteurs.getIdspot()},idpublication=${publications.getIdpublication()})}">
+                                                                        <li class="product-flag new">
+                                                                            ajouter
+                                                                        </li>
+                                                                    </a>
+                                                                    <a th:href="@{/updateSecteur/(idsecteur=${secteurs.getIdsecteur()})}">
+                                                                        <li class="product-flag2 new"> modifier</li>
+                                                                    </a>
+                                                                </ul>
+                                                                <h4><b>secteur :</b>
+                                                                    <td th:text="${secteurs.getNomSecteur()}">
+                                                                </h4>
+                                                                <h4><b>lieu :</b>
+                                                                    <td th:text="${secteurs.getLieuSecteur()}">
+                                                                </h4>
+                                                                <h4><b>type d'escalade :</b>
+                                                                    <h3 th:text="${secteurs.getType()}"></h3>
+                                                                </h4>
+                                                                <h4><b> hauteur:</b>
+                                                                    <td th:text="${secteurs.getHauteur()}"></td>
+                                                                    metres
+                                                                </h4>
+                                                                <input type="hidden" name="hidden_name" value=""/>
+                                                                <input type="hidden" name="hidden_price" value=""/>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-8">
+                                                    <h3 class="text-center"> les voies</h3>
+                                                    <table class="table center-block">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col-sm-8">#</th>
+                                                            <th scope="col-sm-8">nom</th>
+                                                            <th scope="col-sm-8">cotation</th>
+                                                            <th scope="col-sm-8">relai</th>
+                                                            <th scope="col-sm-8">équipé</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody th:each="ways, stat : ${way}"
+                                                               th:if="${secteurs.getIdsecteur()} == ${ways.getIdsecteur()}">
+                                                        <tr>
+                                                            <th scope="row">
+
+                                                                <a th:href="@{addVoie/(idsecteur=${ways.getIdsecteur()})}"><img
+                                                                        src="https://img.icons8.com/ios/20/000000/plus.png"></a>
+
+
+                                                                <a th:href="@{updateVoie/(idsecteur=${ways.getIdsecteur()},idway=${ways.getIdvoie()})}"><img
+                                                                        src="https://img.icons8.com/wired/20/000000/pencil.png"></a>
+
+
+                                                            </th>
+                                                            <td th:text="${ways.getNomWay()}"></td>
+                                                            <td th:text="${ways.getCotation()}"></td>
+                                                            <td th:text="${ways.getRelai()}"></td>
+                                                            <td th:text="${ways.isEquipees()}"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div><br>
+
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+
+
+            <div th:if="${owner}==true">
+                <h1 class="display-3">Aucune location</h1>
+            </div>
+
+
+        </main>
+        -->
+</div>
+<div th:fragment="publication">
+    <main role="main" th:each="topos, stat : ${topo}" th:if="${topos.isHidden()}==false">
+        <!-- carousel-->
+        <div th:replace="~{fragment/carrousel :: carrousel}">carrousel</div>
+        <!-- carousel-->
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3" th:text="${publication.getName()}">
+                </h1>
+                <h1>publié le
+                    <td th:text="${#dates.format(publication.getCreationdate(),'dd-MM-YYYY')}"></td>
+                </h1>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <h1>Les spots de :
+                <td th:text="${topos.getLieuTopo()}">
+            </h1>
+            <h2 class="text-center"></h2>
+            <hr>
+
+
+            <div class="container">
+
+                <div th:each="proprietaires, stat : ${proprietaire}"
+                     th:if="${proprietaires.getIdtopo()}==${topos.getIdtopo()}">
+                    <div th:if="${proprietaires.getIduser()}==${UserId}">
+                        <div class="row">
+                            <div class="col-md-4" th:each="spots, stat : ${spot}"
+                                 th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                         class="card-img-top" alt="test 1" height="200px">
+                                    <div class="card-body">
+                                        <ul class="product-flags">
+                                            <div th:each="rents, stat : ${rent}">
+                                                <div th:if="${rents.getIdtopo()} == ${topos.getIdtopo()}">
+                                                    <!-- si il y deja une location-->
+                                                    <div th:if="${rents.isIsloan() ==true }">
+                                                        <a th:href="@{/unrent/(idtopo=${spots.getIdtopo()})}">
+                                                            <li class="product-flag new">
+                                                                annuler location
+                                                            </li>
+                                                        </a>
+                                                    </div>
+                                                    <!-- si il n'est pas encore louer-->
+                                                    <div th:if="${rents.isIsloan()==false}">
+                                                        <a th:href="@{/rent/(idtopo=${spots.getIdtopo()})}">
+                                                            <li class="product-flag new">
+                                                                louer
+                                                            </li>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div th:each="rents, stat : ${rent}"
+                                                 th:if="${rents.getIduser()==0}">
+                                                <a th:href="@{/rent/(idtopo=${spots.getIdtopo()})}">
+                                                    <li class="product-flag new">
+                                                        louer
+                                                    </li>
+                                                </a>
+                                            </div>
+                                            <a th:href="@{/UpdateSpot/(idspot=${spots.getIdspot()})}">
+                                                <li class="product-flag2 new"> modifier</li>
+                                            </a>
+                                            <a th:href="@{/deleTopo/(idtopo=${spots.getIdtopo()})}">
+                                                <li class="product-flag3 new"> supprimer</li>
+                                            </a>
+                                        </ul>
+                                        <!-- Nom Sport -->
+                                        <h5 class="card-title" th:text="${spots.getNomSpot()}"></h5>
+                                        <p class="card-text" th:text="${spots.getDescription()}"></p>
+                                        <div th:each="rents, stat : ${rent}">
+                                            <div th:each="proprietaires, stat : ${proprietaire}"
+                                                 th:if="${rents.getIduser()}==${proprietaires.getIduser()}">
+
+                                                <div th:if="${rents.getIduser()}==0">
+                                                    <li class="product-flag new">
+                                                        Non disponible
+                                                    </li>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a th:href="@{/publication/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                           class="btn btn-success">voir les secteurs</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="text-center" th:each="spots, stat : ${spot}"
+                            th:if="${idspot} == ${spots.getIdspot()}">les secteurs de :
+                            <td class="text-center" th:text="${spots.getNomSpot()}"></td>
+                        </h2>
+                        <hr>
+
+                        <div class="container" th:each="secteurs, stat : ${secteur}">
+                            <div class="row" th:each="spots, stat : ${spot}"
+                                 th:if="${secteurs.getIdspot()} == ${spots.getIdspot()}">
+                                <div class="col-lg-4">
+                                    <div class="card" style="width: 18rem;">
+                                        <a href="">
+                                            <img src="#" th:src="@{/img/__${secteurs.getLien()}__}" class="card-img-top"
+                                                 alt="..."
+                                                 height="200px"> </a>
+                                        <div class="caption">
+                                            <div class="card-body">
+                                                <ul class="product-flags">
+                                                    <a th:href="@{/addSecteur/(idspot=${secteurs.getIdspot()},idpublication=${publication.getIdpublication()})}">
+                                                        <li class="product-flag new">
+                                                            ajouter
+                                                        </li>
+                                                    </a>
+                                                    <a th:href="@{/updateSecteur/(idsecteur=${secteurs.getIdsecteur()})}">
+                                                        <li class="product-flag2 new"> modifier</li>
+                                                    </a>
+                                                </ul>
+                                                <h4><b>secteur :</b>
+                                                    <td th:text="${secteurs.getNomSecteur()}">
+                                                </h4>
+                                                <h4><b>lieu :</b>
+                                                    <td th:text="${secteurs.getLieuSecteur()}">
+                                                </h4>
+                                                <h4><b>type d'escalade :</b>
+                                                    <h3 th:text="${secteurs.getType()}"></h3>
+                                                </h4>
+                                                <h4><b> hauteur:</b>
+                                                    <td th:text="${secteurs.getHauteur()}"></td>
+                                                    metres
+                                                </h4>
+                                                <input type="hidden" name="hidden_name" value=""/>
+                                                <input type="hidden" name="hidden_price" value=""/>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <h3 class="text-center"> Les voies de
+                                        <td th:text="${secteurs.getNomSecteur()}"></td>
+                                    </h3>
+                                    <table class="table center-block">
+
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nom</th>
+                                            <th>Cotation</th>
+                                            <th>Relai</th>
+                                            <th>Equipé</th>
+                                        </tr>
+                                        </thead>
+                                        <tr th:each="ways, stat : ${way}">
+                                            <tbody th:each="ways, stat : ${way}"
+                                                   th:if="${secteurs.getIdsecteur()} == ${ways.getIdsecteur()}">
+                                            <tr>
+                                                <th scope="row"><a
+                                                        th:href="@{addVoie/(idsecteur=${ways.getIdsecteur()})}"><img
+                                                        alt=""
+                                                        src="https://img.icons8.com/ios/20/000000/plus.png"></a>
+
+
+                                                    <a th:href="@{updateVoie/(idsecteur=${ways.getIdsecteur()},idway=${ways.getIdvoie()})}"><img
+                                                            alt=""
+                                                            src="https://img.icons8.com/wired/20/000000/pencil.png"></a>
+
+
+                                                </th>
+
+                                                <td th:text="${ways.getNomWay()}"></td>
+                                                <td th:text="${ways.getCotation()}"></td>
+                                                <td th:text="${ways.getRelai()}"></td>
+                                                <td th:if="${ways.isEquipees()}">oui</td>
+                                                <td th:if="!${ways.isEquipees()}">non</td>
+
+                                            </tr>
+                                            </tbody>
+                                        </tr>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                            <br>
+
+                        </div>
+                    </div>
+
+
+                    <div
+                            th:if="(${UserId}==0) or (${proprietaires.getIduser()}!=${UserId})">
+                        <div class="row">
+                            <div class="col-md-4" th:each="spots, stat : ${spot}"
+                                 th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                         class="card-img-top" alt="test 1" height="200px">
+                                    <div class="card-body">
+                                        <ul class="product-flags">
+                                            <div th:each="rents, stat : ${rent}">
+                                                <div th:each="proprietaires, stat : ${proprietaire}">
+                                                    <div th:if="${rents.getIdtopo()} == ${topos.getIdtopo()}">
+                                                        <div th:if="${topos.getIdtopo()}==${proprietaires.getIdtopo()}">
+                                                            <!-- si il y a une location possible-->
+                                                            <div th:if="${rents.isIsloan() ==true && rents.isBorrow()==false}">
+                                                                <a th:href="@{/borrow/(idtopo=${spots.getIdtopo()})}">
+                                                                    <li class="product-flag new">
+                                                                        Disponible
+                                                                    </li>
+                                                                </a>
+                                                            </div>
+                                                            <!-- si il n'y a pas de location-->
+                                                            <div th:if="${rents.isIsloan()&& rents.isBorrow()==true || rents.isIsloan()==false }">
+                                                                <li class="product-flag new">
+                                                                    Non disponible
+                                                                </li>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                        <!-- Nom Sport -->
+                                        <h5 class="card-title" th:text="${spots.getNomSpot()}"></h5>
+                                        <p class="card-text" th:text="${spots.getDescription()}"></p>
+                                        <div th:each="rents, stat : ${rent}">
+                                            <div th:each="proprietaires, stat : ${proprietaire}"
+                                                 th:if="${rents.getIduser()}==${proprietaires.getIduser()}">
+                                                <div th:if="${proprietaires.getIdtopo()} == ${topos.getIdtopo()}">
+                                                    <td th:if="${rents.getIdtopo()} == ${topos.getIdtopo()}">
+                                                        <a th:if="${rents.isIsloan()==true}AND ${rents.isBorrow()==false}"
+                                                            th:href="@{/borrow/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                                            class="btn btn-success">Reserver</a>
+
+                                                    </td>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <a th:href="@{/publication/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                           class="btn btn-success">voir les secteurs</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="text-center" th:each="spots, stat : ${spot}"
+                            th:if="${idspot} == ${spots.getIdspot()}">les secteurs de :
+                            <td class="text-center" th:text="${spots.getNomSpot()}"></td>
+                        </h2>
+                        <hr>
+
+                        <div class="container" th:each="secteurs, stat : ${secteur}">
+                            <div class="row" th:each="spots, stat : ${spot}"
+                                 th:if="${secteurs.getIdspot()} == ${spots.getIdspot()}">
+                                <div class="col-lg-4">
+                                    <div class="card" style="width: 18rem;">
+                                        <a href="">
+                                            <img src="#" th:src="@{/img/__${secteurs.getLien()}__}" class="card-img-top"
+                                                 alt="..."
+                                                 height="200px"> </a>
+                                        <div class="caption">
+                                            <div class="card-body">
+                                                <h4><b>secteur :</b>
+                                                    <td th:text="${secteurs.getNomSecteur()}">
+                                                </h4>
+                                                <h4><b>lieu :</b>
+                                                    <td th:text="${secteurs.getLieuSecteur()}">
+                                                </h4>
+                                                <h4><b>type d'escalade :</b>
+                                                    <h3 th:text="${secteurs.getType()}"></h3>
+                                                </h4>
+                                                <h4><b> hauteur:</b>
+                                                    <td th:text="${secteurs.getHauteur()}"></td>
+                                                    metres
+                                                </h4>
+                                                <input type="hidden" name="hidden_name" value=""/>
+                                                <input type="hidden" name="hidden_price" value=""/>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <h3 class="text-center"> Les voies de
+                                        <td th:text="${secteurs.getNomSecteur()}"></td>
+                                    </h3>
+                                    <table class="table center-block">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>nom</th>
+                                            <th>cotation</th>
+                                            <th>relai</th>
+                                            <th>équipé</th>
+                                        </tr>
+                                        </thead>
+                                        <tr th:each="ways, stat : ${way}">
+                                            <tbody th:each="ways, stat : ${way}"
+                                                   th:if="${secteurs.getIdsecteur()} == ${ways.getIdsecteur()}">
+                                            <tr>
+                                                <th scope="row" th:text="${ways.getIdvoie()}">
+                                                </th>
+
+                                                <td th:text="${ways.getNomWay()}"></td>
+                                                <td th:text="${ways.getCotation()}"></td>
+                                                <td th:text="${ways.getRelai()}"></td>
+                                                <td th:if="${ways.isEquipees()}">oui</td>
+                                                <td th:if="!${ways.isEquipees()}">non</td>
+
+                                            </tr>
+                                            </tbody>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <div class="card" th:each="comments, stat : ${comment}"
+                             th:if="${comments.isHidden()}==false">
+                            <div class="card-header" th:each="users, stat : ${user}"
+                                 th:if="${comments.getIduser()}==${users.getId()}"
+                                 th:text="${users.getName()}+' '+ ${users.getLastname()}">
+
+                            </div>
+                            <div th:if="${!userName.equals('0')}">
+                                <div class="card-body" th:if="${comments.getIduser()}==${UserId}">
+                                    <blockquote class="blockquote mb-0">
+
+                                        <p th:text="${comments.getTexte()}"></p>
+
+                                        <footer class="blockquote-footer"><cite title="Source Title">supprimer <a
+                                                th:href="@{/deleCom/(idcommentaire=${comments.getIdcommentaire()})}"><img
+                                                alt=""
+                                                src="https://img.icons8.com/ios/20/000000/close-window.png"
+                                                href=""></a></cite></footer>
+                                    </blockquote>
+                                </div>
+                                <div class="card-body" th:if="${comments.getIduser()}!=${UserId}">
+                                    <blockquote class="blockquote mb-0">
+                                        <p th:text="${comments.getTexte()}">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit. Integer posuere erat a ante.</p>
+                                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                                            Title</cite></footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                            <div th:if="${userName.equals('0')}">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p th:text="${comments.getTexte()}"></p>
+
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row bootstrap snippets">
+                            <div class="col-md-6 col-md-offset-2 col-sm-12">
+                                <div class="comment-wrapper">
+                                    <div class="panel panel-info">
+                                        <br>
+                                        <div class="panel-body">
+                                            <div th:if="${!userName.equals('0')}">
+                                                <form th:action="@{/com/(idtopo=${idtopo},idspot=${idspot},idpublication=${publication.getIdpublication()},iduser=${userConnectedId})}"
+                                                      role="form" method="POST" th:object="${commentaire}">
+
+                                                    <input type="text" th:field="*{texte}" class="form-control"
+                                                           id="texte"
+                                                           placeholder="commentaire" rows="3" required>
+
+
+                                                    <button type="submit" class="btn btn-success">
+                                                        Commenter
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div th:if="${userName.equals('0')}"><a th:href="@{/login}">Se connecter
+                                                pour
+                                                commenter</a></div>
+                                            <!--<h1 th:text="${view}"></h1> -->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div th:fragment="borrow">
+    <main role="main">
+
+        <div class="jumbotron">
+            <div class="container" th:each="topos, stat : ${topo}">
+                <h1 class="display-3">location de :</h1>
+                <h1 th:text="${topos.getLieuTopo()}"></h1>
+                <p>Veuillez indiquer les date de reservation topo</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div th:each="topos, stat : ${topo}">
+
+                <h1 th:text="${topos.getLieuTopo()}">
+
+                </h1>
+                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                <div class="row">
+
+                    <div class="col-md-4" th:each="spots, stat : ${spot}"
+                         th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                 class="card-img-top" alt="test 1" height="200px">
+                            <div class="card-body">
+                                <!-- Nom Sport -->
+                                <h5 class="card-title" th:text="${spots.getNomSpot()}">
+
+                                </h5>
+                                <p class="card-text" th:text="${spots.getDescription()}">
+
+                                </p>
+                                <br>
+                                <a th:href="@{/publication/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                   class="btn btn-success">voir</a>
+                            </div>
+                        </div>
+                        <!-- _______________________FIN SPOT_________________________ -->
+                    </div>
+                </div>
+            </div>
+            <!--______________ FIN TOPO _____________________________-->
+        </div>
+        <br/>
+        <br/>
+        <div class="container" th:each="topos, stat : ${topo}">
+            <form class="form-horizontal" role="form" method="POST" th:action="@{/borrow/(idtopo=${topos.getIdtopo()})}"
+                  th:object="${rent}">
+                <div class="row">
+
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="creationDate">date du début de location</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="date" th:field="*{creationDate}"
+                                       th:attr="min=${rent.getCreationDate()},max=${rent.getReturnDate()}"
+                                       class="form-control" id="creationDate2" name="creationDate"
+                                       placeholder="borrowingdate" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="returnDate">date de retour</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="date" th:field="*{returnDate}"
+                                       th:attr="min=${rent.getCreationDate()},max=${rent.getReturnDate()}"
+                                       class="form-control" id="returnDate2" name="returnDate"
+                                       placeholder="date de retour" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <br>
+                        <button type="submit" class="btn btn-success" th:href="@{/loggedHome}"><i
+                                class="fa fa-user-plus"></i> Reserver
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </main>
+</div>
+<div th:fragment="borrowed">
+    <main role="main">
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Voici les topos loués</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div th:each="topos, stat : ${topo}">
+                <div th:each=" rents, stat : ${rent}">
+                    <div th:if="${topos.getIdtopo()} == ${rents.getIdtopo()}">
+                        <div th:if="${rents.getIduser()} == ${user.getId()} ">
+                            <div th:if="${rents.isSeen()}==false">
+                                <h1 th:text="${topos.getLieuTopo()}">
+                                </h1>
+                                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                                <div class="row">
+                                    <div class="col-md-4" th:each="spots, stat : ${spot}"
+                                         th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+
+                                        <div class="card" style="width: 18rem;">
+                                            <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                                 class="card-img-top" alt="test 1" height="200px">
+                                            <div class="card-body">
+                                                <!-- Nom Sport -->
+                                                <h5 class="card-title" th:text="${spots.getNomSpot()}">
+                                                </h5>
+                                                <p class="card-text" th:text="${spots.getDescription()}">
+                                                </p>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- _______________________FIN SPOT_________________________ -->
+                                </div>
+                                <br>
+                                <div class="alert alert-danger" role="alert">Votre Reservation pour le topo
+                                    <td th:text="${topos.getLieuTopo()}"></td>
+                                    à été annuleé :
+                                    <a th:href="@{/validateDele(idtopo=${topos.getIdtopo()})}"
+                                       class="btn btn-success">valider</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${rents.isSeen()&&rents.isIsloan()&&rents.isBorrow()==true}">
+                            <div th:if="${rents.getIduser()} == ${user.getId()}">
+                                <h1 th:text="${topos.getLieuTopo()}">
+                                </h1>
+                                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                                <div class="row">
+                                    <div class="col-md-4" th:each="spots, stat : ${spot}"
+                                         th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+                                        <div th:if="${rents.isIsloan()==false}"><p>Aucune location</p></div>
+                                        <div class="card" style="width: 18rem;">
+                                            <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                                 class="card-img-top" alt="test 1" height="200px">
+                                            <div class="card-body">
+                                                <!-- Nom Sport -->
+                                                <h5 class="card-title" th:text="${spots.getNomSpot()}">
+                                                </h5>
+                                                <p class="card-text" th:text="${spots.getDescription()}">
+                                                </p>
+                                                <br>
+                                                <a th:href="@{/publication/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                                   class="btn btn-success">voir</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- _______________________FIN SPOT_________________________ -->
+                                </div>
+                            </div>
+                        </div>
+                        <!--______________ FIN TOPO _____________________________-->
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${location}==true">
+                <br> <br> <br> <br> <br>
+                <h1 class="display-3">Aucune location</h1>
+                <br> <br> <br> <br> <br> <br>
+            </div>
+
+        </div>
+    </main>
+    <br>
+</div>
+<div th:fragment="inscriptionTopo">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Inscription de topo </h1>
+                <p>Inscriver votre topo</p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" th:action="@{/insertPublication}" role="form" method="POST"
+                  enctype="multipart/form-data">
+
+
+                <!--_______________________Nom plublication________________________________-->
+                <div class="row" th:object="${publication}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="nomPublication">Nom de publication</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{name}" class="form-control" id="nomPublication"
+                                       placeholder="Nom pour la publication" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--_______________________iduser plublication________________________________-->
+                <!--_______________________creationdate plublication________________________________-->
+                <!--_______________________creationdate plublication________________________________-->
+
+                <!--_____________________________création du topo TOPO__________________________-->
+                <div class="row" th:object="${topo}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="lieuTopo">Ajouter un lieu </label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                                <input type="text" th:field="*{lieuTopo}" name="lieuTopo" list="lieuTopo"
+                                       class=" custom-select">
+
+                                <datalist id="lieuTopo">
+                                    <div th:each="topos, stat : ${topos}">
+                                        <option th:value="${topo.getLieuTopo()}">
+                                    </div>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--________________________INSERTION DANS SPOT_______________________________-->
+                <!--________________________INSERTION idtop= last idtopo+1 si non selection si selection idtopo=idotopo_______________________________-->
+                <!--________________________INSERTION idpublication= idpublication_______________________________-->
+                <div th:fragment="spot">
+                    <!--________________________INSERTION nom SPOT_______________________________-->
+                    <div class="row" th:object="${spot}">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="spotName2">Nom du spot</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group has-danger">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-mountain"></i>
+                                    </div>
+                                    <input type="text" th:field="*{nomSpot}" class="form-control" id="spotName2"
+                                           placeholder="Nom du spot" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--________________________INSERTION description SPOT_______________________________-->
+                    <div class="row" th:object="${spot}">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="description2">Description</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group has-danger">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-mountain"></i>
+                                    </div>
+                                    <input type="text" th:field="*{description}" class="form-control" id="description2"
+                                           placeholder="Description" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--________________________INSERTION lien SPOT_______________________________-->
+                    <div class="row" th:object="${spot}">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="file">Image du Spot</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group has-danger">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" style="width: 2.6rem"><i class="far fa-images"></i>
+                                    </div>
+                                    <input type="file" name="file" id="file" required/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--________________________INSERTION secteur_______________________________-->
+                    <!--________________________INSERTION idspot_______________________________-->
+                    <!--________________________INSERTION idpublication= idpublication_______________________________-->
+
+                    <tr th:fragment="secteur">
+                        <!--________________________INSERTION secteur nom_______________________________-->
+                        <div class="row" th:object="${secteur}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="secteurName">Nom du secteur</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="fas fa-mountain"></i>
+                                        </div>
+                                        <input type="text" th:field="*{nomSecteur}" class="form-control"
+                                               id="secteurName"
+                                               placeholder="Nom du secteur" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--________________________INSERTION secteur lieu_______________________________-->
+                        <div class="row" th:object="${secteur}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="LieuSecteur">Lieu du secteur</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="fas fa-mountain"></i>
+                                        </div>
+                                        <input type="text" th:field="*{lieuSecteur}" class="form-control"
+                                               id="lieuSecteur"
+                                               placeholder="Lieu du secteur" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--________________________INSERTION type_______________________________-->
+
+                        <div class="row" th:object="${secteur}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="type">Type</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="fas fa-mountain"></i>
+                                        </div>
+                                        <select class="browser-default custom-select" id="type" th:field="*{type}">
+                                            <option th:value="sportive">Sportive</option>
+                                            <option th:value="traditionnelle">Traditionnelle</option>
+                                            <option th:value="Bloc">Bloc</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--________________________INSERTION lien_______________________________-->
+                        <div class="row" th:object="${secteur}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="fileSecteur">Image du secteur</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="far fa-images"></i>
+                                        </div>
+                                        <input type="file" name="fileSecteur" id="fileSecteur" required/>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--________________________INSERTION hauteur_______________________________-->
+
+                        <div class="row" th:object="${secteur}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="hauteur">Hauteur du secteur</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="fas fa-mountain"></i>
+                                        </div>
+                                        <input type="number" min="1" th:field="*{hauteur}" class="form-control"
+                                               id="hauteur"
+                                               placeholder="Hauteur" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--________________________INSERTION VOIE nom_______________________________-->
+                        <div class="row" th:object="${way}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="nomWay">Nom de la voie</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="fas fa-mountain"></i>
+                                        </div>
+                                        <input type="text" th:field="*{nomWay}" class="form-control" id="nomWay"
+                                               placeholder="Nom de la voie" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--________________________INSERTION VOIE equip_______________________________-->
+                        <div class="row" th:object="${way}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="equipees">Equipée?</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="fas fa-mountain"></i>
+                                        </div>
+
+
+                                        <select class="browser-default custom-select" id="equipees"
+                                                th:field="*{equipees}">
+                                            <option th:value="true">voie équipée</option>
+                                            <option th:value="false">non équipée</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--________________________INSERTION VOIE cotation _______________________________-->
+                        <div class="row" th:object="${way}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="cotation">Cotation</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="fas fa-mountain"></i>
+                                        </div>
+                                        <select class="browser-default custom-select" id="cotation"
+                                                th:field="*{cotation}">
+                                            <option th:value="'3a'">3a</option>
+                                            <option th:value="'3b'">3b</option>
+                                            <option th:value="'3c'">3c</option>
+                                            <option th:value="'4a'">4a</option>
+                                            <option th:value="'4b'">4b</option>
+                                            <option th:value="'4c'">4c</option>
+                                            <option th:value="'5a'">5a</option>
+                                            <option th:value="'5b'">5b</option>
+                                            <option th:value="'5c'">5c</option>
+                                            <option th:value="'6a'">6a</option>
+                                            <option th:value="'6b'">6b</option>
+                                            <option th:value="'6c'">6c</option>
+                                            <option th:value="'7a'">7a</option>
+                                            <option th:value="'7b'">7b</option>
+                                            <option th:value="'7c'">7c</option>
+                                            <option th:value="'8a'">8a</option>
+                                            <option th:value="'8b'">8b</option>
+                                            <option th:value="'8c'">8c</option>
+                                            <option th:value="'9a'">9a</option>
+                                            <option th:value="'9b'">9b</option>
+                                            <option th:value="'9c'">9c</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--________________________INSERTION VOIE relai_______________________________-->
+                        <div class="row" th:object="${way}">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="relai">Nom du relai</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem"><i
+                                                class="fas fa-mountain"></i>
+                                        </div>
+                                        <input type="text" th:field="*{relai}" class="form-control" id="relai"
+                                               placeholder="Relai" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" th:href="@{/home}" class="btn btn-success"><i class="fa fa-user-plus"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </main>
+</div>
+<div th:fragment="login">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+
+                <h1 class="display-3">Connection</h1>
+                <p>Connecter vous</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <br> <br>
+            <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                L'email ou le mot de passe eest incorrect!
+            </div>
+            <form th:action="@{/login}" method="post">
+                <!--_____________________________EMAIL____________________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="email2" class="sr-only">Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="email" id="email2" name="email" class="form-control" placeholder="Email"
+                                       required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--_____________________________PASSWORD____________________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="password2" class="sr-only">Password</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-key"></i></div>
+                                <input type="password" id="password2" name="password" class="form-control"
+                                       placeholder="Mot de passe" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-6">
+                        <br>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" th:href="@{/loggedHome}">Se
+                            connecter
+                        </button>
+                        <div class="margin-top20 text-center"> Vous n'avez pas de compte? <a th:href="@{/signup}">Creer
+                            un compte</a>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </main>
+    <br> <br>
+</div>
+<div th:fragment="rent">
+    <main role="main">
+
+        <div class="jumbotron">
+            <div class="container" th:each="topos, stat : ${topo}">
+                <h1 class="display-3">location de :</h1>
+                <h1 th:text="${topos.getLieuTopo()}"></h1>
+                <p>Veuillez indiquer les disponibilitées pour votre location de topo</p>
+            </div>
+        </div>
+        <div th:each="topos, stat : ${topo}">
+            <div class="container">
+
+                <h1 th:text="${topos.getLieuTopo()}">
+
+                </h1>
+                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                <div class="row">
+
+                    <div class="col-md-4" th:each="spots, stat : ${spot}"
+                         th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                 class="card-img-top" alt="test 1" height="200px">
+                            <div class="card-body">
+                                <!-- Nom Sport -->
+                                <h5 class="card-title" th:text="${spots.getNomSpot()}">
+
+                                </h5>
+                                <p class="card-text" th:text="${spots.getDescription()}">
+
+                                </p>
+                                <a th:href="@{/publication/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                   class="btn btn-success">voir</a>
+                            </div>
+                        </div>
+                        <!-- _______________________FIN SPOT_________________________ -->
+                    </div>
+                </div>
+            </div>
+            <!--______________ FIN TOPO _____________________________-->
+        </div>
+
+        <br/>
+        <br/>
+        <div class="container" th:each="topos, stat : ${topo}">
+            <form class="form-horizontal" role="form" method="POST" th:action="@{/rent/(idtopo=${topos.getIdtopo()})}"
+                  th:object="${rent}">
+                <div class="row">
+
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="creationDate">date du début de location</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="date" th:field="*{creationDate}" class="form-control" id="creationDate"
+                                       name="creationDate"
+                                       placeholder="borrowingdate" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="returnDate">date de retour</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="date" th:field="*{returnDate}" class="form-control" id="returnDate"
+                                       name="returnDate"
+                                       placeholder="date de retour" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> <a
+                                th:href="@{/rent/(idtopo=${topos.getIdtopo()})}">Louer</a></button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </main>
+</div>
+<div th:fragment="signup">
+    <main role="main">
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Inscription</h1>
+                <p>Veuillez vous inscrire</p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" role="form" method="POST" th:action="@{/signup}" th:object="${user}">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="alert alert-success" role="alert" th:if="${msg}" th:text="${msg}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="firstname">Prénom</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{name}" class="form-control" id="firstname"
+                                       placeholder="Prénom" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="Lastname">Nome</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                                <input type="text" th:field="*{lastname}" class="form-control" id="lastname"
+                                       placeholder="Nom" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                                <input type="text" th:field="*{email}" class="form-control" id="email"
+                                       placeholder="email" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}"
+                               th:errors="*{email}">
+                         </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="password">Mot de passe</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="password" th:field="*{password}" class="form-control" id="password"
+                                       placeholder="Mot de passe" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('password')}"
+                               th:errors="*{password}">
+                         </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> <a
+                                th:href="@{/login}">Enregistrer</a></button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </main>
+</div>
+<div th:fragment="updateVoie">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Mise a jour d'une Voie </h1>
+                <p>Modification d'une voie</p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" th:action="@{/updateVoie}" th:object="${way}" role="form" method="POST"
+                  enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="nomWay2">nom de la voie</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="text" th:value="${way.getNomWay()}" th:field="*{nomWay}"
+                                       class="form-control" id="nomWay2"
+                                       placeholder="nom de la voie" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--________________________INSERTION VOIE id_______________________________-->
+                <input hidden th:value="${way.getIdvoie()}" th:field="*{idvoie}">
+                <input hidden th:value="${way.getIdsecteur()}" th:field="*{idsecteur}">
+                <!--________________________INSERTION VOIE equip_______________________________-->
+                <div class="row">
+
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="equipees2">Equipée?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+
+
+                                <select class="browser-default custom-select" id="equipees2" th:field="*{equipees}">
+                                    <option selected="selected" th:value="${way.isEquipees()}"
+                                            th:text="${way.isEquipees()}"></option>
+                                    <option th:value="true">voie équipée</option>
+                                    <option th:value="false">non équipée</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--________________________INSERTION VOIE cotation _______________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="cotation2">cotation</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <select class="browser-default custom-select" id="cotation2" th:field="*{cotation}">
+                                    <option selected th:value="${way.getCotation()}"
+                                            th:text="${way.getCotation()}"></option>
+                                    <option th:value="'3a'">3a</option>
+                                    <option th:value="'3b'">3b</option>
+                                    <option th:value="'3c'">3c</option>
+                                    <option th:value="'4a'">4a</option>
+                                    <option th:value="'4b'">4b</option>
+                                    <option th:value="'4c'">4c</option>
+                                    <option th:value="'5a'">5a</option>
+                                    <option th:value="'5b'">5b</option>
+                                    <option th:value="'5c'">5c</option>
+                                    <option th:value="'6a'">6a</option>
+                                    <option th:value="'6b'">6b</option>
+                                    <option th:value="'6c'">6c</option>
+                                    <option th:value="'7a'">7a</option>
+                                    <option th:value="'7b'">7b</option>
+                                    <option th:value="'7c'">7c</option>
+                                    <option th:value="'8a'">8a</option>
+                                    <option th:value="'8b'">8b</option>
+                                    <option th:value="'8c'">8c</option>
+                                    <option th:value="'9a'">9a</option>
+                                    <option th:value="'9b'">9b</option>
+                                    <option th:value="'9c'">9c</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--________________________INSERTION VOIE relai_______________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="relai2">nom du relai</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="text" th:value="${way.getRelai()}" th:field="*{relai}" class="form-control"
+                                       id="relai2"
+                                       placeholder="relai" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" th:href="@{/updateVoie}" class="btn btn-success"><i
+                                class="fa fa-user-plus"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+<div th:fragment="updateSecteur">
+
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Mise a jour d'un secteur </h1>
+                <p></p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" th:action="@{/updateSecteur}" role="form" method="POST"
+                  enctype="multipart/form-data">
+                <div class="row" th:object="${secteur}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="secteurName2">nom du secteur</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="text" th:value="${secteur.getNomSecteur()}" th:field="*{nomSecteur}"
+                                       class="form-control" id="secteurName2"
+                                       placeholder="nom du secteur" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--________________________INSERTION secteur lieu_______________________________-->
+                <div class="row" th:object="${secteur}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="lieuSecteur2">lieu du secteur</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="text" th:value="${secteur.getLieuSecteur()}" th:field="*{lieuSecteur}"
+                                       class="form-control" id="lieuSecteur2"
+                                       placeholder="lieu du secteur" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--________________________INSERTION type_______________________________-->
+                <div class="row" th:object="${secteur}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="type2">type</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-mountain"></i>
+                                </div>
+                                <select class="browser-default custom-select" id="type2" th:value="${secteur.getType()}"
+                                        th:field="*{type}">
+                                    <option th:value="sportive">sportive</option>
+                                    <option th:value="traditionnelle">traditionnelle</option>
+                                    <option th:value="Bloc">Bloc</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--________________________INSERTION hauteur_______________________________-->
+
+                <div class="row" th:object="${secteur}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="hauteur2">hauteur du secteur</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="number" min="1" th:value="${secteur.getHauteur()}" th:field="*{hauteur}"
+                                       class="form-control" id="hauteur2"
+                                       placeholder="hauteur" required>
+                                <input hidden th:value="${secteur.getIdsecteur()}" th:field="*{idsecteur}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" th:href="@{/updateSecteur}" class="btn btn-success"><i
+                                class="fa fa-user-plus"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+<div th:fragment="updateSpot">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Mise a jour d'un spot </h1>
+                <p></p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" th:action="@{/updateSpot}" role="form" method="POST"
+                  enctype="multipart/form-data">
+                <div class="row" th:object="${spot}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="spotName">nom du spot</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="text" th:value="${spot.getNomSpot()}" th:field="*{nomSpot}"
+                                       class="form-control" id="spotName"
+                                       placeholder="nom du spot" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--________________________INSERTION description SPOT_______________________________-->
+                <div class="row" th:object="${spot}">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="description">description</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="text" th:value="${spot.getDescription()}" th:field="*{description}"
+                                       class="form-control" id="description"
+                                       placeholder="description" required>
+                                <input hidden th:value="${spot.getIdpublication()}" th:field="*{idpublication}">
+                                <input hidden th:value="${spot.getIdspot()}" th:field="*{idspot}">
+                                <input hidden th:value="${spot.getIdtopo()}" th:field="*{idtopo}">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" th:href="@{/updateSpot}" class="btn btn-success"><i
+                                class="fa fa-user-plus"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </main>
+</div>
+<div th:fragment="addVoie">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Ajout de Voie supplémentaire </h1>
+                <p>Ajout d'une voie supplémentaire</p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" th:action="@{/addVoie}" role="form" th:object="${way}" method="POST"
+                  enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="nomWay3">nom de la voie</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="text" th:field="*{nomWay}"
+                                       class="form-control" id="nomWay3"
+                                       placeholder="nom de la voie" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input hidden th:value="${way.getIdsecteur()}" th:field="*{idsecteur}">
+                <!--________________________INSERTION VOIE equip_______________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="equipees3">Equipée?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <select class="browser-default custom-select" id="equipees3" th:field="*{equipees}">
+                                    <option th:value="true">voie équipée</option>
+                                    <option th:value="false">non équipée</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--________________________INSERTION VOIE cotation _______________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="cotation3">cotation</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <select class="browser-default custom-select" id="cotation3" th:field="*{cotation}">
+
+                                    <option th:value="'3a'">3a</option>
+                                    <option th:value="'3b'">3b</option>
+                                    <option th:value="'3c'">3c</option>
+                                    <option th:value="'4a'">4a</option>
+                                    <option th:value="'4b'">4b</option>
+                                    <option th:value="'4c'">4c</option>
+                                    <option th:value="'5a'">5a</option>
+                                    <option th:value="'5b'">5b</option>
+                                    <option th:value="'5c'">5c</option>
+                                    <option th:value="'6a'">6a</option>
+                                    <option th:value="'6b'">6b</option>
+                                    <option th:value="'6c'">6c</option>
+                                    <option th:value="'7a'">7a</option>
+                                    <option th:value="'7b'">7b</option>
+                                    <option th:value="'7c'">7c</option>
+                                    <option th:value="'8a'">8a</option>
+                                    <option th:value="'8b'">8b</option>
+                                    <option th:value="'8c'">8c</option>
+                                    <option th:value="'9a'">9a</option>
+                                    <option th:value="'9b'">9b</option>
+                                    <option th:value="'9c'">9c</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--________________________INSERTION VOIE relai_______________________________-->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="relai3">nom du relai</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="text" th:field="*{relai}" class="form-control"
+                                       id="relai3"
+                                       placeholder="relai" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" th:href="@{/addVoie}" class="btn btn-success"><i
+                                class="fa fa-user-plus"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+<div th:fragment="addSecteur">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">ajout d'un secteur et d'une voie </h1>
+                <p>This is a template for a simple marketing or informational website. It includes a large callout
+                    called a
+                    jumbotron and three supporting pieces of content. Use it as a starting point to create something
+                    more
+                    unique.</p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form-horizontal" th:action="@{/addSecteur}" th:object="${secteur}" role="form" method="POST"
+                  enctype="multipart/form-data">
+                <div th:replace="~{fragment/content :: secteur}">secteur</div>
+                <input hidden th:value="${secteur.getIdpublication()}" th:field="*{idpublication}">
+                <input hidden th:value="${secteur.getIdspot()}" th:field="*{idspot}">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" th:href="@{/addSecteur}" class="btn btn-success"><i
+                                class="fa fa-user-plus"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </main>
+</div>
+<div th:fragment="addSpot">
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">ajout d'un spot ,d'un secteur et d'une voie </h1>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <form class="form-horizontal" th:action="@{/addspot}" th:object="${secteur}" role="form" method="POST"
+                  enctype="multipart/form-data">
+
+                <div th:replace="~{fragment/content :: spot}">spot</div>
+                <tr th:object="${spot}">
+                    <input hidden th:value="${spot.getIdpublication()}" th:field="*{idpublication}">
+                    <input hidden th:value="${spot.getIdtopo()}" th:field="*{idtopo}">
+                </tr>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button type="submit" th:href="@{/addspot}" class="btn btn-success"><i
+                                class="fa fa-user-plus"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+<div th:fragment="search">
+    <main role="main">
+        <!-- carousel-->
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3"> Vous avez recherché :
+                    <td th:text="${search}"></td>
+                </h1>
+            </div>
+        </div>
+
+        <!-- _________________________DEBUT TOPO________________________ -->
+        <div th:each="topos, stat : ${topo}" th:if="${topos.isHidden()}==false">
+            <div class="container">
+
+                <h1>
+                    <td th:text="${topos.getLieuTopo()}"></td>
+                </h1>
+                <!--_________________________ DEBUT SPOT_______________________ -->
+
+                <div class="row">
+
+                    <div class="col-md-4" th:each="spots, stat : ${spot}"
+                         th:if="${topos.getIdtopo()} == ${spots.getIdtopo()}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="#" th:src="@{/img/__${spots.getLienSpot()}__}"
+                                 class="card-img-top" alt="test 1" height="200px">
+                            <div class="card-body">
+                                <!-- Nom Sport -->
+                                <h5 class="card-title">
+                                    <td th:text="${spots.getNomSpot()}"></td>
+                                </h5>
+                                <p class="card-text" th:text="${spots.getDescription()}">
+
+                                </p>
+                                <a th:href="@{/publication/(idtopo=${spots.getIdtopo()},idspot=${spots.getIdspot()})}"
+                                   class="btn btn-success">voir</a>
+                            </div>
+                        </div>
+                        <!-- _______________________FIN SPOT_________________________ -->
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--______________ FIN TOPO _____________________________-->
+        </div>
+    </main>
+
+</div>
+</body>
+</html>
