@@ -52,7 +52,7 @@
         <application.name>MyERP</application.name>
 
         <!-- ===== Version properties ===== -->
-        <log4j.version>2.8.1</log4j.version>
+        <log4j.version>2.17.1</log4j.version>
         <spring.version>4.3.7.RELEASE</spring.version>
 
         <sonar.host.url>http://91.162.99.141:29000</sonar.host.url>
