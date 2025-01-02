@@ -1,10 +1,9 @@
 # 💼 Portfolio <i>FR/Eng</i>
 ## 📃 Présentation / Presentation
-Aujourd'hui, je souhaite effectuer un V.I.E afin d'obtenir une expérience significative à l'étranger, car les voyages font aussi partis de mes centres d'intérêts. Habituée au changement, au fait de s'adapter à une autre culture comme une autre langue, cette opportunité me permettrait d'établir des contacts de qualité et d'établir de solides bases pour ma future carrière.
-
+ 
 Je suis capable de développer en backend comme en frontend, j'ai également des compétences en Data. Ces connaissances me permettent de pouvoir créer des applications ou sites complets, performants et d'avoir une vision à 360° d'un projet.
 
-Today, I want to do a V.I.E in order to get a meaningful experience abroad, as travel is also part of my interests. Accustomed to change, to adapting to another culture like another language, this opportunity would allow me to establish quality contacts and establish a solid foundation for my future career.
+ 
 
 I am able to develop both backend and frontend, I also have Data skills. This knowledge allows me to create complete, efficient applications or sites and to have a 360° vision of a project.
 ## Projets
